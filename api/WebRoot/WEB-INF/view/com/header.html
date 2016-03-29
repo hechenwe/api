@@ -1,0 +1,61 @@
+<div class="navbar-header  ">
+	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+	</button>
+	<a class="navbar-brand" href="#">Interface Word</a> 
+	<a class="navbar-brand" onclick="chooseThis(this);"  href="../indexController/introduction.html">
+	    <#if page == "introduction">
+		<font   class="btn btn-default btn-xs " size="2">入门</font>  
+	    <#else>
+		<font   class=" " size="2">入门</font>  
+	    </#if>
+	</a> 
+	<#if user.role.roleCode == "ADMIN">
+	<a   href="../companyController/user.html" class=" navbar-brand">
+	    <#if page == "user">
+		<font   class=" btn btn-default btn-xs " size="2">用户管理</font>
+		 <#else>
+		<font   class=" " size="2">用户管理</font>
+		  </#if>
+	</a> 
+	</#if>
+	<a href="../indexController/project.html" class=" navbar-brand">
+	    <#if page == "project">
+		<font  class=" btn btn-default btn-xs "  size="2">所有项目</font>
+		 <#else>
+		<font    size="2">所有项目</font>
+		  </#if>
+	</a> 
+ 
+	<#if user?exists> 
+	 
+	</#if>
+	
+	   <a class=" navbar-brand" href="../indexController/test.html">
+	    <#if page == "test">
+		<font class=" btn btn-default btn-xs "   size="2">自定义调试</font>
+		<#else>
+		<font   size="2">自定义调试</font>
+		</#if>
+	   </a>
+</div>
+ 
+
+<div class="nav navbar-top-links navbar-right">
+   <a class=" navbar-brand" >
+		<font size="2"><#if user.company ??> ${user.company.companyName} </#if> &nbsp;&nbsp;&nbsp;  ${user.userName} &nbsp;&nbsp;&nbsp; ${user.role.roleName} </font>
+	</a>
+	
+	<a class=" navbar-brand"></a> <!-- 占位符 -->
+	
+   <a class=" navbar-brand" href="../indexController/exit.html">
+		<font style="color: #FFAA2F ; font-weight:bold;" size="2">退出</font>
+	</a>
+	<a class=" navbar-brand"></a>
+		 
+	
+</div>
+
+<script type="text/javascript">
+ 
+</script>

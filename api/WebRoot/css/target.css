@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+/* html 锚点 向下 偏移 的css实现方式 */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.target {
+	position: relative;
+}
+
+.placeholder {
+	position: absolute;
+	display: block;
+	width: 100%; /* 小于父级宽度的值 */
+	height: 60px; /* 高度值为顶部固定块的高度 */
+	top: -60px; /*  值为顶部固定块的高度 */
+}

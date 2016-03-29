@@ -1,0 +1,24 @@
+<div   class="sidebar-nav navbar-collapse" id="div_tree">
+				<#if project ??> 
+					<ul class="ul-root">
+						<li id="li${project.projectId}"><img class="img"  id="img${project.projectId}" onclick="openUl('${project.projectId}');" src="../images/left.png"><a  ondblclick="openUl('${project.projectId}');"> <img alt="项目名称" src="../images/P.png">&nbsp; <small>${project.projectName!}</small></a> 
+						    <#if project.modules ??>
+                                <#list project.modules as module >
+								<ul class="">
+									<li id="li${module.moduleId}"><img class="img"  id="img${module.moduleId}" onclick="openUl('${module.moduleId}');" src="../images/left.png">&nbsp;<a ><a ondblclick="openUl('${module.moduleId}');"><img src="../images/M.png">&nbsp;<small>${module.moduleName}</small></a>
+									<#if module.interfacs ??>
+                                             <#list module.interfacs as interfac >
+											 <ul class="div-display">
+												<li><a href="#${interfac.interfacId}"><img src="../images/I.png">&nbsp;<small>${interfac.interfacName}</small></a>
+												</li>
+											 </ul>
+										    </#list>
+									    </#if>
+									</li>
+								</ul>
+							    </#list>
+						    </#if>
+						</li>
+					</ul>
+				</#if>
+</div>

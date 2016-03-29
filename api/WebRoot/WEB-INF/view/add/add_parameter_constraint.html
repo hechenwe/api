@@ -1,0 +1,61 @@
+<div style="margin-left: 0px; width: 100%" class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default ">
+			<div class="panel-heading">添加参数的约束</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<form role="form">
+							<input id="${interfac.interfacId}_parameterId" type="hidden">
+							<div class="form-group">
+								<input id="${interfac.interfacId}parameterConstraintCode" class="form-control" placeholder="值 ">
+							</div>
+							<div class="form-group">
+								<input id="${interfac.interfacId}parameterConstraintExplain" class="form-control" placeholder="含义  ">
+							</div>
+							<!-- <div class="form-group">
+								<input id="${interfac.interfacId}weight" class="form-control" placeholder="权重 ">
+							</div> -->
+							<button onclick="saveParameterConstraint('${interfac.interfacId}');" type="button" class="btn btn-default">确定</button>
+							<button onclick="close_add_parameter_constraint('${interfac.interfacId}');" type="button" class="btn btn-default">关闭</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+//-----------------------------------------------------保存参数约束说明----------------------------------------------
+function saveParameterConstraint() {
+	var interfacId= '${interfac.interfacId}';
+	var parameterId = $("#"+ interfacId +"_parameterId").val();
+	var parameterConstraintId = Math.uuid();
+	var parameterConstraintCode = $("#"+ interfacId +"parameterConstraintCode").val();
+	var parameterConstraintExplain = $("#"+ interfacId +"parameterConstraintExplain").val();
+	var weight = $("#"+ interfacId +"weight").val();
+    
+ 
+	var urlString = "../parameterConstraint/saveParameterConstraint.html?";
+	urlString = urlString + "parameterId=" + parameterId + "&parameterConstraintId=" + parameterConstraintId
+	+ "&parameterConstraintCode=" + parameterConstraintCode + "&parameterConstraintExplain=" + parameterConstraintExplain
+	+ "&weight=" + weight;
+	//alert(urlString);
+	  $.get(urlString, function(data) {
+		//$("#page-wrapper").empty();
+		if (data == "1") {
+				alert("添加成功!");
+			 $("#parameterConstraintCode").val("");
+			 $("#parameterConstraintExplain").val("");
+			 $("#weight").val("");
+		}else{
+			    alert("添加失败!");
+		}
+	})	  
+}
+
+
+function close_add_parameter_constraint(interfacId){
+	$("#div_parameter_constraint_"+interfacId).addClass("div-display");
+}
+</script>

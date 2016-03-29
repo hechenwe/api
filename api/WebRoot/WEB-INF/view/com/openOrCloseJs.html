@@ -1,0 +1,84 @@
+ <script type="text/javascript">
+	 //----------------left--------------------
+	function openUl(id){
+	 var bool = $("#li"+id).children('ul').hasClass('div-display');
+	 
+	 if(bool){ 
+			$("#img"+id).attr("src","../images/down.png");
+		}else{
+			$("#img"+id).attr("src","../images/left.png");
+		}
+	 $("#li"+id).children('ul').toggleClass('div-display');
+	 }
+	
+	
+	//-----------------------------------
+	function openOrColseModule(moduleId ,imgId){
+		var bool = $("#module"+moduleId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#module"+moduleId).toggleClass('div-display');
+	}
+	//-----------------------------------
+	function openOrColseInterfac(interfacId ,imgId){
+		var bool = $("#interfac"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#interfac"+interfacId).toggleClass('div-display');
+	}
+	
+	//-----------------------------------
+	function openOrCloseParameter(interfacId ,imgId){
+		var bool = $("#parameter"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#parameter"+interfacId).toggleClass('div-display');
+	}
+	//-----------------------------------
+	function openOrCloseExample(interfacId ,imgId){
+		var bool = $("#example"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#example"+interfacId).toggleClass('div-display');
+	}
+	//-----------------------------------
+	function openOrCloseTry(interfacId,imgId){
+		var bool = $("#try"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#try"+interfacId).toggleClass('div-display');
+	}
+	
+	// -------------------------------------
+	
+	function changeUrl(interfacId,type){
+		if(type=="JSON"){
+			$("#url-"+interfacId).val($("#input"+interfacId).val());	
+		}else{
+			
+		$("#form"+interfacId).attr("action",$("#input"+interfacId).val());
+		}
+	}
+	
+	
+	//--------------------------------------------------------------------
+	    $("[data-toggle=popover]").popover();
+	        
+	 //-------------------------------------------------------------------- 
+	 
+	</script>

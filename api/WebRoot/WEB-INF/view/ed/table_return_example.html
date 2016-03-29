@@ -1,0 +1,105 @@
+<div class="">
+	<#if interfac.examples ??> 
+	<#list interfac.examples as example> 
+	<div id = "example${example.exampleId}"> 
+	<h5>
+	<#if example.exampleType=="SUCCESS">
+		<b>成功示例 :</b>
+	<#elseif example.exampleType=="FAILURE" >
+		<b>失败示例 :</b>
+	<#elseif example.exampleType=="EXCEPTION" >
+		<b>异常示例 :</b>
+	<#else>
+		<b>其他示例 :</b>
+	</#if>
+		<p onclick="toUpdateExample('${example.exampleId}','${interfac.interfacId}');"  style = "color:#627CBE;" class="fa fa-edit "></p>
+	    <p onclick="deleteExample('${example.exampleId}');"  style = "color:#627CBE;" class="fa fa-trash-o"></p>
+	</h5>
+	<pre><small id = "small-example-${example.exampleId}">${example.exampleContent} </small></pre>
+	
+	
+
+	<!--  添加返回值参数 -->
+
+	<div   class="table-responsive">
+
+		<!------------------------ 返回值参数---------------------------- -->
+
+
+		<#if example.parameterReturs ?size != 0>
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th><small>名称</small></th>
+					<th><small>代码</small></th>
+					<th width="6%"><small>数据类型</small></th>
+
+					<th width="6%"><small>长度</small></th>
+					 
+					<th><small>示例</small></th>
+
+					<th width="6%"><small>是否必须</small></th>
+					<th><small>约束</small></th>
+					<th width="6%"><small>操作</small></th>
+					 
+				</tr>
+			</thead>
+			<tbody>
+				<#list example.parameterReturs as p >
+
+				<tr height="20px">
+					<td>${p.parameterName}</td>
+					<td>${p.parameterCode}</td>
+					<td>${p.parameterDataType}</td>
+                    <#if p.parameterDataType == "String">
+					<td>[${p.minLength},${p.maxLength}]</td>
+					<#else>
+					<td></td>
+					</#if>
+					<td>
+					<#if p.parameterExample?length gt 11 >
+					<a data-toggle="popover" data-placement="top" data-content="${p.parameterExample}" >
+					${p.parameterExample?substring(0,5)}...</a>
+					<#else>
+					${p.parameterExample}
+					</#if>
+					</td> 
+					<#if p.isMust =="1">
+					<td>必须</td> 
+					<#else>
+					<td>可选</td>
+					</#if>
+					<td>
+					   <#if p.valueExplains?size !=0 >
+						<div style="margin-left: 0px; margin-right: 0px;" class="col-lg-10">
+							<select id="select_${p.parameterId}" class="form-control input-sm "> 
+							<#list p.valueExplains as ve>
+								<option>${ve.value} : ${ve.valueMeaning}</option> 
+								</#list>
+							</select>
+						</div> 
+						</#if>
+						<img style="float: left; margin-top: 7px;" onclick="openOrCloseValueExplain('${p.parameterId}','${example.exampleId}');" src="../images/add.png">
+					</td>
+					 <td>
+						 <p onclick="" style=" color:#627CBE;" class="fa fa-edit"></p> &nbsp;&nbsp;&nbsp;
+						 <p onclick="" style=" color:#627CBE;" class="fa fa-trash-o"></p>
+					 </td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+		</#if>
+
+	</div>
+	<p>
+		<a onclick="openOrColseEaxmpleReturn('${example.exampleId}');"><img src="../images/add.png"></img>添加返回值参数</a>
+	</p>
+	<#include "../add/add_parameter_return.html"/>
+		<!------------------------ 返回值参数---------------------------- -->
+
+	<#include "../add/add_value_explain.html"/>
+	<!-- 添加返回参数 值说明-->
+    </div>
+	</#list> </#if>
+</div>

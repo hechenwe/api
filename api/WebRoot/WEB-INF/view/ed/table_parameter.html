@@ -1,0 +1,141 @@
+<div class="col-lg-12">
+	<div class=" table-responsive ">
+		<#if interfac.parameters ?size !=0 || interfac.parameters ?size ==0 >
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<!--  <th><small>编号</small></th> -->
+					<th><small>名称</small></th>
+					<th><small>代码</small></th>
+
+					<th><small>类型</small></th>
+					<th><small>长度</small></th>
+				 
+
+					<th><small>实例</small></th>
+					<th><small>约束</small></th>
+					<th width="6%"><small>操作</small></th>
+				</tr>
+			</thead>
+			<tbody id = 'tbody-${interfac.interfacId}'>
+				<#list interfac.parameters as parameter> <#if parameter.isMust =="1">
+				<tr id = "tr-${parameter.parameterId}">
+					 
+					<td><small>${parameter.parameterName}</small></td>
+					<td><small>${parameter.parameterCode}</small></td>
+
+					<td><small>${parameter.parameterDataType}</small></td>
+					<td><small><#if parameter.minLength==parameter.maxLength>${parameter.minLength}<#else>[${parameter.minLength},${parameter.maxLength}]</#if>  </small></td>
+					 
+
+					<td> 
+					<#if parameter.parameterExample?length gt 11 >
+					<a data-toggle="popover" data-placement="top" data-content="${parameter.parameterExample}" >
+					${parameter.parameterExample?substring(0,5)}...</a>
+					<#else>
+					${parameter.parameterExample}
+					</#if>
+					</td> 
+					<#if parameter.parameterConstraints ?size ==0>
+					<td>
+						<div class="col-lg-8">
+							<select id="select_${parameter.parameterId}" class="form-control input-sm div-display "> <#list parameter.parameterConstraints as pc>
+								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
+							</select>
+						</div class="col-lg-4"> <img onclick="divDisplay('${interfac.interfacId}','${parameter.parameterId}');" src="../images/add.png">
+						</div>
+					</td> <#else>
+					<td>
+						<div class="col-lg-8">
+							<select id="select_${parameter.parameterId}" class="form-control input-sm "> <#list parameter.parameterConstraints as pc>
+								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
+							</select>
+						</div class="col-lg-4"> <img onclick="divDisplay('${interfac.interfacId}','${parameter.parameterId}');" src="../images/add.png">
+						</div>
+					</td> </#if>
+					<td> 
+					<p onclick="updateParameter2('${parameter.parameterId}','${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p>
+					&nbsp;&nbsp;
+					<p onclick="deleteParameter('${parameter.parameterId}');" style="color:#627CBE;" class="fa fa-times"></p>
+					</td>
+
+				</tr>
+				</#if> </#list></#if>
+				<!-------------- 可选参数------------- -->
+				<#assign n = 0> <#if interfac.parameters ?? > <#list interfac.parameters as parameter> <#if parameter.isMust =="0"> <#if n==0>
+				<tr>
+					<td align="center" colspan="9">可选参数</td>
+				</tr>
+				</#if> <#assign n = 1>
+				<tr id = "tr-${parameter.parameterId}">
+
+					<td><small>${parameter.parameterName}</small></td>
+					<td><small>${parameter.parameterCode}</small></td>
+
+					<td><small>${parameter.parameterDataType}</small></td>
+					<td><small>[${parameter.minLength},${parameter.maxLength}]</small></td>
+					 
+
+					<td>${parameter.parameterExample}</td> <#if parameter.parameterConstraints ?size ==0>
+					<td>
+						<div class="col-lg-8">
+							<select id="select_${parameter.parameterId}" class="form-control input-sm div-display "> <#list parameter.parameterConstraints as pc>
+								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
+							</select>
+							</div>
+						<div class="col-lg-4"> <img onclick="divDisplay('${interfac.interfacId}','${parameter.parameterId}');" src="../images/add.png">
+						</div>
+					</td> <#else>
+					<td>
+						<div class="col-lg-8">
+							<select id="select_${parameter.parameterId}" class="form-control input-sm "> <#list parameter.parameterConstraints as pc>
+								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
+							</select>
+						</div>
+						<div class="col-lg-4"> <img onclick="divDisplay('${interfac.interfacId}','${parameter.parameterId}');" src="../images/add.png">
+						</div>
+					</td> </#if>
+					<td>
+					<p onclick="updateParameter2('${parameter.parameterId}','${interfac.interfacId}');" style="color:#627CBE;" class="fa fa fa-edit"></p>
+					<p onclick="deleteParameter('${parameter.parameterId}');" style="color:#627CBE;" class="fa fa-trash-o"></p>
+					
+					</td> 
+
+				</tr>
+				</#if> </#list> </#if>
+				<!-------------- 可选参数------------- -->
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+//-----------------------------------------------------保存参数约束说明----------------------------------------------
+function deleteParameter(parameterId) {
+	if (confirm("确认要删除？")) {
+	var urlString = "../parameter/deleteParameter.html?parameterId="+parameterId;
+	 
+    $.get(urlString, function(data) {
+		
+		if(data=="1"){
+			//alert(parameterId);
+			$("#tr-"+parameterId).remove();
+		}else{
+			alert("删除失败!");
+		}
+	})
+	
+	}	  
+}
+
+function updateParameter2(parameterId,interfacId){
+	 
+	var url = '../parameter/updateParameter.html?parameterId='+parameterId;
+	$.get(url,function (data){
+		$("#up-parameter"+interfacId).empty();
+		$("#up-parameter"+interfacId).append(data);//.toggleClass('div-display');;
+		 
+	})
+}
+</script>

@@ -1,0 +1,114 @@
+
+
+<p>
+	<small>接口URL : <input id="input${interfac.interfacId}" autocomplete="off" onchange="changeUrl('${interfac.interfacId}','${interfac.parameterFormat}');" class="input-non" style="border-bottom:1px solid #337AB7;outline:none ;width:90%" value="${interfac.url}"></small>
+</p>
+ 
+<p>
+	<small><b>参数 :</b></small>
+</p>
+
+
+<#if interfac.parameterFormat == "JSON" >
+
+
+<form  target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="../spanRequestController/request.html" method="POST">
+	<#if interfac.parameters ?? > 
+	<#list interfac.parameters as parameter>
+	<h6>
+		 <textarea  style="width:98.11%" name="jsonString" id="text_${parameter.parameterId}" class="form-control-textarea" rows="5">${parameter.parameterExample}</textarea> 
+	        <br>
+	        <p style="margin-left: 0px; margin-right: 16px;" align="right"><a onclick="formatJson('text_${parameter.parameterId}','try');"><small id="small_text_${parameter.parameterId}">格式化JSON</small></a></p> 
+	</h6>
+	<input type="hidden" name="requestType" value="POST"> </#list>
+	</#if>
+	<input type="hidden" id="url-${interfac.interfacId}" name="url" value="${interfac.url}"> 
+	 
+	<button style="margin-left: -30px;" class="btn btn-default" type="submit">
+		<font size="0.5">提交</font>
+	</button>
+</form>
+<#elseif interfac.parameterFormat == "FILE">
+
+ 
+	<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left: 30px; width:100%;"  action="${interfac.url}" method="${interfac.requestType}" enctype="multipart/form-data">
+		 <#if interfac.parameters ?? >
+		  
+	     <#list interfac.parameters as parameter>
+		     <#if parameter.parameterDataType =="File">
+			  ${parameter.parameterCode}: <br>
+			 
+	            <input type="file" name="${parameter.parameterCode}"> 
+             
+			 </#if>
+			 <div style="height:12px;" class="col-lg-12" ></div>
+		 </#list>
+		 
+		 <#list interfac.parameters as parameter>
+		     <#if parameter.parameterDataType !="File" >
+			    <br>${parameter.parameterCode}:
+				<#if parameter.parameterExample?length gt 32 >
+				<textarea style="width: 50%" name="${parameter.parameterCode}"   class="form-control" rows="5">${parameter.parameterExample}</textarea>
+				<#else>
+					<input style="width: 50%" class="input-non" name="${parameter.parameterCode}" value="${parameter.parameterExample}">
+				</#if>
+			 </#if>
+		 </#list>
+		 
+		 </#if>
+	    <br> <button style="margin-left: -30px;margin-top:20px;" class="btn btn-default" type="submit"><font size="0.5">提交</font></button>
+      </form>
+
+<#else>
+<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="${interfac.url}" method="${interfac.requestType}">
+	<#if interfac.parameters ?? > <#list interfac.parameters as parameter>
+	<h6>
+		${parameter.parameterCode}:
+		<#if parameter.parameterExample?length gt 32 >
+		<textarea style="width: 50%" name="${parameter.parameterCode}"   class="form-control" rows="5">${parameter.parameterExample}</textarea>
+		<#else>
+		  <#if parameter.parameterConstraints?size !=0>
+		      <select   class=" " name="${parameter.parameterCode}" >
+		      <#list parameter.parameterConstraints as pc>
+                  <option value="${pc.parameterConstraintCode}">${pc.parameterConstraintCode}</option>
+		      </#list>
+              </select>
+		  <#else>
+		      <input type="text" autocomplete="off" class="input-non" style="border-bottom:1px solid #337AB7;outline:none ;width:50%" name="${parameter.parameterCode}" value="${parameter.parameterExample}">
+		 </#if>
+		</#if>
+	</h6>
+	</#list> </#if>
+	<button onclick="SetWinHeight('${interfac.interfacId}')" style="margin-left: -30px;" class="btn btn-default btn-xs" type="submit">
+		<font size="0.5">提交</font>
+	</button>
+</form>
+</#if>
+
+<div style="height: 20px;"></div>
+<div style="border: 1px solid #E4E1E1;  height:200px; width: 100%;">
+<iframe  frameborder="0" border="0" ; marginwidth="0" marginheight="0" style=" height:200px; width: 100%;" id="${interfac.interfacId}_iframe" name="${interfac.interfacId}_iframe"></iframe>
+</div>
+<a onclick="hah('${interfac.interfacId}_iframe');">Json</a>
+<script type="text/javascript">
+	function hah(id){
+		alert($(document.getElementById(id).contentWindow.document.body).html());
+	}
+     
+	
+	function AddLength(input){
+		 
+		var length =input.value.length; 
+		var size = input.size;
+		console.log("length="+length + " size="+ size);
+	    if(length>10){
+		input.size = length+1;
+	    	
+	    }else{
+	    	input.size= 10;
+	    }
+		 
+	}
+	
+	
+</script>

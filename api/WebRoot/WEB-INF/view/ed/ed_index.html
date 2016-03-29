@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../images/I.png"  type="image/x-icon">
+<title>编辑接口文档</title> <#include "../com/css.html"/>
+<style type="text/css">
+.main-top2 {
+	position: fixed;
+	z-index: 999;
+	top:550px;
+	right:20px;
+}
+</style>
+</head>
+<body>
+
+<input type="hidden" id="input_projectId" value="${project.projectId}">
+
+	<div id="wrapper">
+		<nav id="nav" class="navbar navbar-default navbar-static-top main-top" role="navigation" style="margin-bottom: 0">
+			<#include "../com/header.html"/>
+			
+		</nav>
+	<div   class="col-lg-12">
+	  
+	  <div class="col-lg-2"></div> 
+      <div class="main-top1">
+        <div style="height:20px;" class="col-lg-12 "></div>	 
+        <div  id="div_ed_left " style=" height:1000px; overflow: auto;" class="col-lg-12  "  >
+ 	    <#include "../left.html"/>   
+        </div>
+      </div>
+    <div class="col-lg-10">
+		 
+		<div   id="page-wrapper">
+		
+			<#include "../ed/ed_main.html"/>	
+		 
+		</div>
+	</div>
+	
+	
+	<!------------------------------------------- 项目  ---------------------------------------->
+	<div id="project" style="display: none">
+		<#include "../add/add_project.html"/>
+	</div>
+	 
+	 
+
+	<!------------------------------------------- 参数  ---------------------------------------->
+	<div id="parameter" style="display: none">
+		<#include "../add/add_parameter.html"/>
+	</div>
+	<div id="parameter_json" style="display: none">
+		<#include "../add/add_parameter_json.html"/>
+	</div>
+	<!------------------------------------------- 参数约束  ---------------------------------------->
+	<div id="parameter_constraint" style="display: none">
+		 
+	</div>
+	<!------------------------------------------- 返回值参数  ---------------------------------------->
+	<div id="parameter_return" style="display: none">
+		 
+	</div>
+	<!------------------------------------------- 返回值说明  ---------------------------------------->
+	<div id="value_explain" style="display: none">
+		 
+	</div>
+	<a class="main-top2" href="../indexController/project.html">
+		<button type="button" class="btn btn-info btn-circle btn-lg"><small style="margin-left:-7px;">返回</small></button>
+	</a>
+<!------------------------------------------------JS-----------------------------------------------------------------  -->
+ 
+	<#include "../com/js.html"/>
+	<#include "../com/openOrCloseJs.html"/>
+	<script type="text/javascript">
+		 
+		//-------------------------------------------------------------------------
+		function hiddenDiv(divId){
+			$("#"+divId).toggleClass('div-display');
+		}
+        
+		//------------------------------打开/关闭节点----------------------------------------
+
+		function openOrClose(type, id) {
+			var bool = $("#" + id).children().children("span").hasClass("open-span");
+			if (bool) {
+				$("#" + id).find("li ul").empty();
+			} else {
+				//alert("haha");
+				getData(type, id);
+			}
+			$("#" + id).children().children("span").toggleClass('open-span');//改变三角符号的现状
+		}
+		 
+		//-------------------------------------------------------------------------------------------------------------------------------------
+		
+       
+		
+		
+		//-------------------------------异步加载---------------------------------------
+		function getData(type, id) {
+			var url = "";
+			if (type == "project") { //加载项目下的模块数据
+				url = "../module/getModules.html?projectId=" + id;
+				$.get(url, function(data) {
+					$.each(data.modules, function(i, object) {
+						var moduleId = object.moduleId;
+						var moduleName = object.moduleName;
+						var html = '<ul id="'+ moduleId +'">' + '<li><span onclick="openOrClose(\'module\',\'' + moduleId + '\');"></span><a ondblclick="openOrClose(\'module\',\'' + moduleId + '\');" ><img alt="模块名称" src="../images/M.png"> ：' + moduleName + '</a> ' + '</ul>';
+						$("#" + id).children("li").append(html);
+					});
+				})
+			} else if (type == "module") {//加载模块下的接口数据
+				url = "../interface/getInterfaces.html?moduleId=" + id;
+				$.get(url, function(data) {
+					$.each(data.interfaces, function(i, object) {
+						var interfacId = object.interfacId;
+						var interfacName = object.interfacName;
+						var html = '<ul id="'+ interfacId +'">' + '<li><span onclick="openOrClose(\'interfacs\',\'' + interfacId + '\');"></span><a ondblclick="openOrClose(\'interfacs\',\'' + interfacId + '\');" ><img alt="接口名称" src="../images/I.png"> ' + interfacName + '</a> <img src="../images/add-P2.png" onclick="toAddParameter(\'' + interfacId + '\');"></img>' + '</ul>';
+						$("#" + id).children("li").append(html);
+					});
+				})
+			}else if (type == "interface"){//加载接口下的参数数据
+				url = "../parameter/getParameters.html?interfacId=" + id;
+				$.get(url, function(data) {
+					$.each(data.interfaces, function(i, object) {
+						var parameterId = object.parameterId;
+						var parameterName = object.parameterName;
+						var html = '<ul id="'+ interfacId +'">' + '<li><span onclick="openOrClose(\'interfacs\',\'' + interfacId + '\');"></span><a ondblclick="openOrClose(\'interfacs\',\'' + interfacId + '\');" >参数名称：' + interfacName + '</a> <img src="../images/add-P.png" onclick="toAddParameter(\'' + interfacId + '\');"></img>' + '</ul>';
+						$("#" + id).children("li").append(html);
+					});
+				})
+			}
+		}
+		
+		
+		//---------------   展开 模块    --------------------
+		function openOrColseModule(moduleId ,imgId){
+			
+			var bool = $("#module"+moduleId).hasClass('div-display');
+			if(bool){ 
+				var string = $("#module"+moduleId).html().trim();
+				if(string==""){
+			   
+				$.get("../interface/getInterfaces.html?moduleId="+moduleId,function (data){
+					$("#module"+moduleId).append(data);
+				})
+					
+				}
+				$("#"+imgId).attr("src","../images/down.png");
+			}else{
+				$("#"+imgId).attr("src","../images/left.png");
+			}
+			$("#module"+moduleId).toggleClass('div-display');
+		}
+		//------------------ 展开 接口 -----------------
+		function openOrColseInterfac(interfacId ,imgId){
+			var bool = $("#interfac"+interfacId).hasClass('div-display');
+			if(bool){ 
+				var string = $("#interfac"+interfacId).html().trim();
+				if(string==""){
+				$.get("../interface/getInterfac.html?interfacId="+interfacId,function (data){
+					$("#interfac"+interfacId).append(data);
+				})
+				}
+				$("#"+imgId).attr("src","../images/down.png");
+			}else{
+				$("#"+imgId).attr("src","../images/left.png");
+			}
+			$("#interfac"+interfacId).toggleClass('div-display');
+		}
+		
+		//-----------------------------------
+		function openOrCloseParameter(interfacId ,imgId){
+			var bool = $("#parameter"+interfacId).hasClass('div-display');
+			if(bool){ 
+				$("#"+imgId).attr("src","../images/down.png");
+			}else{
+				$("#"+imgId).attr("src","../images/left.png");
+			}
+			$("#parameter"+interfacId).toggleClass('div-display');
+		}
+		//-----------------------------------
+		function openOrCloseExample(interfacId ,imgId){
+			var bool = $("#example"+interfacId).hasClass('div-display');
+			if(bool){ 
+				
+				$("#"+imgId).attr("src","../images/down.png");
+			}else{
+				$("#"+imgId).attr("src","../images/left.png");
+			}
+			$("#example"+interfacId).toggleClass('div-display');
+		}
+		//-----------------------------------
+		function openOrCloseTry(interfacId,imgId){
+			var bool = $("#try"+interfacId).hasClass('div-display');
+			if(bool){ 
+				$("#"+imgId).attr("src","../images/down.png");
+			}else{
+				$("#"+imgId).attr("src","../images/left.png");
+			}
+			$("#try"+interfacId).toggleClass('div-display');
+		}
+		
+		// -------------------------------------
+		
+		function changeUrl(interfacId){
+			$("#form"+interfacId).attr("action",$("#input"+interfacId).val());
+		}
+		
+		 
+		//--------------------------------------------------------------------
+		    $("[data-toggle=popover]")
+		        .popover()
+		 //-------------------------------------------------------------------- 
+	</script>
+</body>
+</html>

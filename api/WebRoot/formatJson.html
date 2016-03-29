@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>post get 测试</title>
+
+
+</head>
+<body>
+	 
+	<pre id="text" rows="10">
+	[{"id":103807,"code":"2ee1c4979f674b468d2faa024bce4b99","createAt":1430818776294,"create_author":"admin","update_at":1430818776294,"update_author":null,"name":"sf","lineCode":"2ee1c4979f674b468d2faa024bce4b99","knowledgeIndex":"","parentCode":"0","isleaf":true,"typeCode":"0","subjectCode":"274ea","gradeCode":"83e01","booktype":"cec15c81e25040898f5aae9be1dd60ad","isdel":false,"startStudyTime":902,"endStudyTime":1108,"version":1,"sorts":103807,"selfLabel":false,"chk":false},{"id":109649,"code":"0349a81f4761472aa6a7cdd806394372","createAt":1430880239703,"create_author":"admin","update_at":1430880239703,"update_author":null,"name":"sf","lineCode":"0349a81f4761472aa6a7cdd806394372","knowledgeIndex":"","parentCode":"0","isleaf":true,"typeCode":"0","subjectCode":"274ea","gradeCode":"83e01","booktype":"cec15c81e25040898f5aae9be1dd60ad","isdel":false,"startStudyTime":1109,"endStudyTime":1231,"version":1,"sorts":109649,"selfLabel":false,"chk":false},{"id":114247,"code":"9c2eabc140be4aecba57ff4be88a8f03","createAt":1430888710593,"create_author":"admin","update_at":1430888710593,"update_author":null,"name":"fs","lineCode":"9c2eabc140be4aecba57ff4be88a8f03","knowledgeIndex":"","parentCode":"0","isleaf":true,"typeCode":"0","subjectCode":"274ea","gradeCode":"83e01","booktype":"cec15c81e25040898f5aae9be1dd60ad","isdel":false,"startStudyTime":303,"endStudyTime":503,"version":1,"sorts":114247,"selfLabel":false,"chk":false},{"id":118815,"code":"00647543941e4418985afafbaddb1229","createAt":1430892845077,"create_author":"admin","update_at":1430892845077,"update_author":null,"name":"sdf","lineCode":"00647543941e4418985afafbaddb1229","knowledgeIndex":"","parentCode":"0","isleaf":true,"typeCode":"0","subjectCode":"274ea","gradeCode":"83e01","booktype":"cec15c81e25040898f5aae9be1dd60ad","isdel":false,"startStudyTime":504,"endStudyTime":630,"version":1,"sorts":118815,"selfLabel":false,"chk":false}]
+	</pre>
+	 
+	 <pre>
+	 </pre>
+	 
+    <button onclick="formatJson();">text</button>
+	
+	<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="Math.uuid.js"></script>
+	<script type="text/javascript">
+	function formatJson(){
+	//alert($("#text").text());
+	var str = format($("#text").text(),false);
+	alert(str);
+	$("#text").text(str);
+	}
+	
+	  function format(txt,compress){/* 格式化JSON源码(对象转换为JSON文本) */  /*是否为压缩模式*/ 
+        var indentChar = '    ';   
+        if(/^\s*$/.test(txt)){   
+            alert('数据为空,无法格式化! ');   
+            return;   
+        }   
+        try{var data=eval('('+txt+')');}   
+        catch(e){   
+            alert('数据源语法错误,格式化失败! 错误信息: '+e.description,'err');   
+            return;   
+        };   
+        var draw=[],last=false,This=this,line=compress?'':'\n',nodeCount=0,maxDepth=0;   
+           
+        var notify=function(name,value,isLast,indent/*缩进*/,formObj){   
+            nodeCount++;/*节点计数*/  
+            for (var i=0,tab='';i<indent;i++ )tab+=indentChar;/* 缩进HTML */  
+            tab=compress?'':tab;/*压缩模式忽略缩进*/  
+            maxDepth=++indent;/*缩进递增并记录*/  
+            if(value&&value.constructor==Array){/*处理数组*/  
+                draw.push(tab+(formObj?('"'+name+'":'):'')+'['+line);/*缩进'[' 然后换行*/  
+                for (var i=0;i<value.length;i++)   
+                    notify(i,value[i],i==value.length-1,indent,false);   
+                draw.push(tab+']'+(isLast?line:(','+line)));/*缩进']'换行,若非尾元素则添加逗号*/  
+            }else   if(value&&typeof value=='object'){/*处理对象*/  
+                    draw.push(tab+(formObj?('"'+name+'":'):'')+'{'+line);/*缩进'{' 然后换行*/  
+                    var len=0,i=0;   
+                    for(var key in value)len++;   
+                    for(var key in value)notify(key,value[key],++i==len,indent,true);   
+                    draw.push(tab+'}'+(isLast?line:(','+line)));/*缩进'}'换行,若非尾元素则添加逗号*/  
+                }else{   
+                        if(typeof value=='string')value='"'+value+'"';   
+                        draw.push(tab+(formObj?('"'+name+'":'):'')+value+(isLast?'':',')+line);   
+                };   
+        };   
+        var isLast=true,indent=0;   
+        notify('',data,isLast,indent,false);   
+        return draw.join('');   
+    }     
+		
+	</script>
+
+</body>
+</html>

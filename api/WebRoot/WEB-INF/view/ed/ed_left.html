@@ -1,0 +1,7 @@
+<div class="sidebar-nav navbar-collapse  " id="div_tree">
+					<#if project ??> 
+					<ul class="ul-root" id="${project.projectId}">
+						<li><span onclick="openOrClose('project','${project.projectId}');"></span><a ondblclick="openOrClose('project','${project.projectId}');"> <img alt="项目名称" src="../images/P.png"> ${project.projectName!}</a>  <img onclick="toAddModule('${project.projectId}');"  alt="项目名称" src="../images/add-M2.png"> </li>
+					</ul>
+					</#if>
+</div>

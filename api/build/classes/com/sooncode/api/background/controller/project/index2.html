@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../images/I.png"  type="image/x-icon">
+<title>查看API文档</title> 
+<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+<link href="../dist/css/timeline.css" rel="stylesheet">
+
+<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+<link href="../bower_components/morrisjs/morris.css" rel="stylesheet">
+
+<link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="../css/tree.css" rel="stylesheet" type="text/css">
+<link href="../css/main.css" rel="stylesheet" type="text/css">
+<link href="../css/target.css" rel="stylesheet" type="text/css">
+  
+</head>
+
+<body>
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top main-top " role="navigation" style="margin-bottom: 0;">
+			<div class="navbar-header  ">
+	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+	</button>
+	<a class="navbar-brand" href="#">Interface Word</a> 
+	<a class=" navbar-brand" href="../indexController/introduction.html">
+		<font class="font-col" size="2">入门</font>
+	</a> 
+	<#if user.role.roleCode == "ADMIN">
+	<a  href="../companyController/user.html" class=" navbar-brand">
+		<font size="2">用户管理</font>
+	</a> 
+	</#if>
+	<a href="../indexController/project.html" class=" navbar-brand">
+		<font size="2">所有项目</font>
+	</a> 
+<!-- 	<a class=" navbar-brand" href="../indexController/index.html" >
+		<font size="2">查看文档</font>
+	</a>  -->
+	<#if user?exists> 
+	<!-- 	<a class="navbar-brand " href="../indexController/edIndex.html">
+			<font size="2">编辑文档</font>
+		</a>  -->
+	</#if>
+	   <a class=" navbar-brand" href="../indexController/test.html">
+		<font class="font-col" size="2">自定义调试</font>
+	   </a>
+</div>
+ 
+
+<div class="nav navbar-top-links navbar-right">
+  <!--  <a class=" navbar-brand"><img width="200px" height="20px" src=" "></img></a> -->
+   <a class=" navbar-brand" >
+		<font size="2"> ${user.company.companyName} &nbsp;&nbsp;&nbsp;  ${user.userName} &nbsp;&nbsp;&nbsp; ${user.role.roleName} </font>
+	</a>
+	
+	<a class=" navbar-brand"></a> <!-- 占位符 -->
+	
+   <a class=" navbar-brand" href="../indexController/exit.html">
+		<font style="color: #FFAA2F ; font-weight:bold;" size="2">退出</font>
+	</a>
+	<a class=" navbar-brand"></a>
+		 
+	
+</div>
+		</nav>
+		
+<div   class="col-lg-12">
+	  <div style="height:50px;" class="col-lg-12"></div>
+	   <div class="col-lg-2"  ></div>
+	  <!------------------------------------------ left-------------------start------------------- --> 
+      <div class=" main-top1"  >
+         <div style="height:20px;" class="col-lg-12 "></div>	 
+        <div  id="div_ed_left " style=" height:1000px; overflow: auto;" class="col-lg-12  "  >
+ 	   <div   class="sidebar-nav navbar-collapse" id="div_tree">
+				<#if project ??> 
+					<ul class="ul-root">
+						<li id="li${project.projectId}"><img class="img"  id="img${project.projectId}" onclick="openUl('${project.projectId}');" src="../images/left.png"><a  ondblclick="openUl('${project.projectId}');"> <img alt="项目名称" src="../images/P.png">&nbsp; <small>${project.projectName!}</small></a> 
+						    <#if project.modules ??>
+                                <#list project.modules as module >
+								<ul class="">
+									<li id="li${module.moduleId}"><img class="img"  id="img${module.moduleId}" onclick="openUl('${module.moduleId}');" src="../images/left.png">&nbsp;<a ><a ondblclick="openUl('${module.moduleId}');"><img src="../images/M.png">&nbsp;<small>${module.moduleName}</small></a>
+									<#if module.interfacs ??>
+                                             <#list module.interfacs as interfac >
+											 <ul class="div-display">
+												<li><a href="#${interfac.interfacId}"><img src="../images/I.png">&nbsp;<small>${interfac.interfacName}</small></a>
+												</li>
+											 </ul>
+										    </#list>
+									    </#if>
+									</li>
+								</ul>
+							    </#list>
+						    </#if>
+						</li>
+					</ul>
+				</#if>
+</div>
+        </div>
+      </div>
+      <!------------------------------------------ left-------------------end-------------------- --> 
+      
+    <div class="col-lg-10">
+        
+		<div style="overflow: auto;" id="page-wrapper">
+			<div class="row" style="height:300px;">
+				<div class="col-lg-12">
+					<div class="panel-body">
+						<p class="lead text-center">${project.projectName}项目接口文档</p>
+						<p class=" text-center">作者 : hechen</p>
+						<p class=" text-center">版本 : 1.0</p>
+						<p class=" text-center">创建日期 :${project.creatDate?string("yyyy年MM月dd日")}</p>
+						<!------------------- 模块 -----------------开始 -->
+
+						<#if project.modules ??>
+						<!-- 模块 if-->
+						<#list project.modules as module >
+						<a class="target" name="${module.moduleId}"> <span class="placeholder"></span></a><!-- 锚点 -->
+						<!-- 模块 list-->
+						<span></span>
+						<h4>
+							<b><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')">${module.moduleName}</a></b>
+						</h4>
+						
+						<div id="module${module.moduleId}" class="">
+							<#if module.interfacs ??>
+							<!-- 接口 if-->
+							<#list module.interfacs as interfac >
+                        <a class="target" name="${interfac.interfacId}"><span class="placeholder"></span></a><!-- 锚点  -->
+						<div class="col-lg-12" style="height: 20px;"></div>
+						<div  style="margin-left: 30px;">
+
+							<!-- 接口 list-->
+							<h5>
+								<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> 
+							</h5>
+							
+                            <div id="interfac${interfac.interfacId}" class=" ">
+            
+							<p>
+								<small>接口URL : ${interfac.url}</small>
+							</p>
+							<p>
+								<small>请求方式 : ${interfac.requestType}</small>
+							</p>
+                           
+							<div style="margin-left: 60px;">
+
+								<!------------------- 参数 -----------------开始 -->
+
+								<h5>
+									<img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png">&nbsp;&nbsp;<img src="../images/P.png"><b><a ondblclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');">参数 :</a></b>
+								</h5>
+
+
+								<div class="col-lg-12">
+	<div class=" table-responsive ">
+		<#if interfac.parameters ?size !=0 && interfac.parameterFormat != "JSON" > 
+		<table id="parameter${interfac.interfacId}" class="table table-striped table-bordered table-hover ">
+		 
+			<thead>
+				<tr>
+					<!--  <th><small>编号</small></th> -->
+					<th><small>名称</small></th>
+					<th><small>代码</small></th>
+
+					<th><small>类型</small></th>
+					<!-- <th><small>最小长度</small></th> -->
+					<th><small>长度</small></th>
+
+					<th><small>示例</small></th>
+					<th><small>约束</small></th>
+					<!-- <th><small>备注</small></th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<#list interfac.parameters as parameter> <#if parameter.isMust =="1">
+				<tr>
+					<!-- <td>1</td> -->
+					<td><small>${parameter.parameterName}</small></td>
+					<td><small>${parameter.parameterCode}</small></td>
+
+					<td><small>${parameter.parameterDataType}</small></td>
+					<#if parameter.minLength == parameter.maxLength>
+					<td><small>${parameter.minLength}</small></td>
+					<#else>
+					<td><small>[${parameter.minLength},${parameter.maxLength}]</small></td>
+					</#if>
+					<!-- <td>${parameter.maxLength}</td> -->
+
+					<td>
+					<#if parameter.parameterExample?length gt 11 >
+					<a data-toggle="popover" data-placement="top" data-content="${parameter.parameterExample}" >
+					<small>${parameter.parameterExample?substring(0,5)}...</small></a>
+					<#else>
+					<small>${parameter.parameterExample}</small>
+					</#if>
+					</td>
+					<#if parameter.parameterConstraints ?size ==0>
+					<td><small>无</small></td> 
+					<#else>
+					<td>
+						<div class="col-lg-12">
+							<select id="select_${parameter.parameterId}" class="form-control input-sm "> <#list parameter.parameterConstraints as pc>
+								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
+							</select>
+						</div>
+					</td> 
+					</#if>
+					<!-- <td>${parameter.parameterExplain}</td> -->
+
+				</tr>
+				</#if> </#list></#if>
+				<!-------------- 可选参数------------- -->
+				<#assign n = 0> <#if interfac.parameters ?? > <#list interfac.parameters as parameter> <#if parameter.isMust =="0"> <#if n==0>
+				<tr>
+					<td align="center" colspan="9">可选参数</td>
+				</tr>
+				</#if> <#assign n = 1>
+				<tr>
+
+					<td><small>${parameter.parameterName}</small></td>
+					<td><small>${parameter.parameterCode}</small></td>
+
+					<td><small>${parameter.parameterDataType}</small></td>
+					<#if parameter.minLength == parameter.maxLength>
+					<td>${parameter.maxLength}</td>
+					<#else>
+					<td><small>[${parameter.minLength},${parameter.maxLength}]</small></td>
+					</#if>
+					<!-- <td>${parameter.maxLength}</td> -->
+
+					<td><small>${parameter.parameterExample}</small></td> 
+					<#if parameter.parameterConstraints ?size !=0>
+					<td>
+						<div class="col-lg-12">
+							<select id="select_${parameter.parameterId}" class="form-control input-sm   "> 
+							<#list parameter.parameterConstraints as pc>
+								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> 
+							</#list>
+							</select>
+						</div>
+					</td> 
+					<#else>
+					<td> 无</td> 
+					</#if>
+				<!-- 	<td>${parameter.parameterExplain}</td> -->
+
+				</tr>
+				</#if> </#list> </#if>
+				<!-------------- 可选参数------------- -->
+
+			</tbody>
+		</table>
+	</div>
+</div>
+								 
+
+								<!------------------- 返回示例 -----------------开始 -->
+
+								<h5>
+									<img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/R.png"> <a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')"><b>返回示例 :</b></a> 
+								</h5>
+
+								
+
+								<div id="example${interfac.interfacId}" class="span-4  "> 
+									<#if interfac.examples ??> <#list interfac.examples as example> <#if example.exampleType=="SUCCESS">
+									<h6>
+										<b>成功示例 :</b>
+									</h6>
+									<#elseif example.exampleType=="FAILURE" >
+									<h6>
+										<b>失败示例 :</b>
+									</h6>
+									<#elseif example.exampleType=="EXCEPTION" >
+									<h6>
+										<b>异常示例 :</b>
+									</h6>
+									<#else>
+									<h6>
+										<b>其他示例 :</b>
+									</h6>
+									</#if>
+                                 
+								  <pre  style="margin-left: 0px; margin-right: 10px;"><small id = "pre-${example.exampleId}">${example.exampleContent}</small></pre>
+							      <p style="margin-left: 0px; margin-right: 10px;" align="right"><a onclick="formatJson('pre-${example.exampleId}');"><small id="small_pre-${example.exampleId}">格式化JSON</small></a></p> 
+							      <div style="margin-left: 0px; margin-right: 10px;" class="table-responsive">
+							
+									<!------------------------ 返回值参数 ---------------------------- -->
+							
+							
+									<#if example.parameterReturs ?size != 0>
+									<table class="table table-striped table-bordered table-hover">
+										<thead>
+											<tr>
+												<th><small>名称</small></th>
+												<th><small>代码</small></th>
+												<th><small>类型</small></th>
+							
+												<th><small>长度</small></th>
+											<!-- 	<th><small>最大长度</small></th> -->
+												<th><small>示例</small></th>
+							
+												<th><small>约束</small></th>
+												<th><small>说明</small></th>
+											<!-- 	<th>备注</th> -->
+											</tr>
+										</thead>
+										<tbody>
+											<#list example.parameterReturs as p >
+							
+											<tr>
+												<td ><small>${p.parameterName}</small></td>
+												<td><small>${p.parameterCode}</small></td>
+												<td><small>${p.parameterDataType}</small></td>
+							                    <#if p.maxLength == p.minLength>
+												<td><small>${p.maxLength}</small></td>
+							                    <#else>
+												<td><small>[${p.minLength},${p.maxLength}]</small></td>
+							                    </#if>
+												<!-- <td><small></small></td> -->
+												<td>
+												<#if p.parameterExample?length gt 11 >
+												<a data-toggle="popover" data-placement="top" data-content="${p.parameterExample}" >
+												<small>${p.parameterExample?substring(0,5)}...</small></a>
+												<#else>
+												<small>${p.parameterExample}</small>
+												</#if>
+												</td> 
+												<#if p.isMust =="1">
+												<td><small>必须</small></td> 
+												<#else>
+												<td><small>可选</small></td>
+												</#if>
+												<td>
+												   <#if p.valueExplains?size !=0 >
+													<div style="margin-left: 0px; margin-right: 0px;" class="col-lg-10">
+														<select id="select_${p.parameterId}" class="form-control input-sm "> 
+														<#list p.valueExplains as ve>
+															<option>${ve.value} : ${ve.valueMeaning}</option> 
+															</#list>
+														</select>
+													</div> 
+													</#if>
+													 
+												</td>
+												<!-- <td>${p.parameterExplain}</td> -->
+											</tr>
+											</#list>
+										</tbody>
+									</table>
+									
+									</#if>
+							
+								</div>
+		                                  <!------------------------ 返回值参数---------------------------- -->
+								 
+									<!--  添加返回值参数 -->
+  
+									</#list> </#if>
+								</div>
+ 
+								<!-- 返回示例模块 -->
+                                <h5>
+									<b><img class="img" id="img_try_${interfac.interfacId}" onclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/T.png"> <a ondblclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')"><font color="#FFAA2F">试一试</font></a></b>
+								</h5>
+								<div id="try${interfac.interfacId}" class=" ">
+							<p>
+	<small>接口URL : <input id="input${interfac.interfacId}" onchange="changeUrl('${interfac.interfacId}','${interfac.parameterFormat}');" style="border-bottom:1px solid #D5D5D5;outline:none;width: 90%" class="input-non"  value="${interfac.url}"></small>
+</p>
+<p>
+	<small>请求方式 : ${interfac.requestType}</small>
+</p>
+<p>
+	<small><b>参数 :</b></small>
+</p>
+
+
+<#if interfac.parameterFormat == "JSON" >
+
+
+<form  target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="../spanRequestController/request.html" method="POST">
+	<#if interfac.parameters ?? > 
+	<#list interfac.parameters as parameter>
+	<h6>
+		 <textarea  style="width:98.11%" name="jsonString" id="text_${parameter.parameterId}" class="form-control-textarea" rows="5">${parameter.parameterExample}</textarea> 
+	        <br>
+	        <p style="margin-left: 0px; margin-right: 16px;" align="right"><a onclick="formatJson('text_${parameter.parameterId}','try');"><small id="small_text_${parameter.parameterId}">格式化JSON</small></a></p> 
+	</h6>
+	<input type="hidden" name="requestType" value="POST"> </#list>
+	</#if>
+	<input type="hidden" id="url-${interfac.interfacId}" name="url" value="${interfac.url}"> 
+	 
+	<button style="margin-left: -30px;" class="btn btn-default" type="submit">
+		<font size="0.5">提交</font>
+	</button>
+</form>
+<#elseif interfac.parameterFormat == "FILE">
+
+ 
+	<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left: 30px; width:100%;"  action="${interfac.url}" method="${interfac.requestType}" enctype="multipart/form-data">
+		 <#if interfac.parameters ?? >
+		  
+	     <#list interfac.parameters as parameter>
+		     <#if parameter.parameterDataType =="File">
+			  ${parameter.parameterCode}: <br>
+			 
+	            <input type="file" name="${parameter.parameterCode}"> 
+             
+			 </#if>
+			 <div style="height:12px;" class="col-lg-12" ></div>
+		 </#list>
+		 
+		 <#list interfac.parameters as parameter>
+		     <#if parameter.parameterDataType !="File" >
+			    <br>${parameter.parameterCode}:
+				<#if parameter.parameterExample?length gt 32 >
+				<textarea style="width: 50%" name="${parameter.parameterCode}"   class="form-control" rows="5">${parameter.parameterExample}</textarea>
+				<#else>
+					<input style="width: 50%" class="input-non" name="${parameter.parameterCode}" value="${parameter.parameterExample}">
+				</#if>
+			 </#if>
+		 </#list>
+		 
+		 </#if>
+	    <br> <button style="margin-left: -30px;margin-top:20px;" class="btn btn-default" type="submit"><font size="0.5">提交</font></button>
+      </form>
+ 
+
+
+
+<#else>
+<form id="form${interfac.interfacId}" target="${interfac.interfacId}_iframe" style="margin-left: 30px;" action="${interfac.url}" method="${interfac.requestType}">
+	<#if interfac.parameters ?? > <#list interfac.parameters as parameter>
+	<h6>
+		${parameter.parameterCode}:
+		<#if parameter.parameterExample?length gt 32 >
+		<textarea style="width: 50%" name="${parameter.parameterCode}"   class="form-control" rows="5">${parameter.parameterExample}</textarea>
+		<#else>
+		  <#if parameter.parameterConstraints?size !=0>
+		      <select  style="width: 50%" class="form-control" name="${parameter.parameterCode}" >
+		      <#list parameter.parameterConstraints as pc>
+                  <option value="${pc.parameterConstraintCode}">${pc.parameterConstraintCode}</option>
+		      </#list>
+              </select>
+		  <#else>
+		      <input style="border-bottom:1px solid #D5D5D5;outline:none" class="input-non" name="${parameter.parameterCode}" value="${parameter.parameterExample}">
+		 </#if>
+		</#if>
+	</h6>
+	</#list> </#if>
+	<button onclick="SetWinHeight('${interfac.interfacId}')" style="margin-left: -30px;" class="btn btn-default" type="submit">
+		<font size="0.5">提交</font>
+	</button>
+</form>
+</#if>
+
+<div style="height: 20px;"></div>
+<div style="border: 1px solid #E4E1E1;  height:200px; width: 100%;">
+<iframe  frameborder="0" border="0" ; marginwidth="0" marginheight="0" style=" height:200px; width: 100%;" id="${interfac.interfacId}_iframe" name="${interfac.interfacId}_iframe"></iframe>
+</div>
+<a onclick="hah('${interfac.interfacId}_iframe');">Json</a>
+<script type="text/javascript">
+	function hah(id){
+		alert($(document.getElementById(id).contentWindow.document.body).html());
+	}
+ 
+</script>
+								</div>
+								<!-- 试一试 -->
+                              
+							</div>
+
+						</div>
+						</div>
+						
+						 
+						<hr style="height:1px;border:none;border-top:1px dashed #B2B8BD;" />
+						</#list>
+						<!-- 接口list-->
+						</#if>
+						<!-- 接口if-->
+                        <div style="height: 40px;" class="col-lg-12"></div>
+                        </div>
+                        
+						</#list>
+						<!-- 模块 list-->
+						</#if>
+						<!-- 模块 if-->
+					</div>
+					
+					<div style="height: 400px;" class="col-lg-12"></div>
+					
+				</div>
+			</div>
+		</div>
+    </div>
+ </div>
+  
+	<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script src="../bower_components/metisMenu/dist/metisMenu.js"></script>
+
+<script src="../bower_components/raphael/raphael-min.js"></script>
+
+<script src="../bower_components/morrisjs/morris.min.js"></script>
+
+
+<script src="../js/iframe.js"></script>
+<script src="../js/bootbox.min.js"></script>
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../js/Math.uuid.js"></script>
+<script src="../js/edit.js"></script>
+<script src="../js/save.js"></script>
+<script src="../js/add.js"></script>
+<script src="../js/autosize.js"></script><!-- textarea 自适应  -->
+<script src="../js/json_format.js"></script><!-- 格式化json -->
+<!-- <script src="../dist/js/sb-admin-2.js"></script> -->
+ 
+	<script type="text/javascript">
+	
+	
+	autosize(document.querySelectorAll('textarea'));/* textarea 自适应 */
+	
+	function formatJson(exampleId,type){
+		var text = $("#small_"+exampleId).text();
+		if(text=="格式化JSON"){
+			  $("#small_"+exampleId).text("压缩JSON");
+			  var str = format($("#"+exampleId).text(),false);
+		}else{
+			  $("#small_"+exampleId).text("格式化JSON");
+			  var str = format($("#"+exampleId).text(),true);
+		}
+		$("#"+exampleId).text(str);
+		if(type=="try"){//试一试模块
+		autosize.update($("#"+exampleId)); /* 刷新 textareat 控件  */
+		}
+	}
+	
+	 //----------------left--------------------
+	function openUl(id){
+	 var bool = $("#li"+id).children('ul').hasClass('div-display');
+	 
+	 if(bool){ 
+			$("#img"+id).attr("src","../images/down.png");
+		}else{
+			$("#img"+id).attr("src","../images/left.png");
+		}
+	 $("#li"+id).children('ul').toggleClass('div-display');
+	 }
+	
+	
+	//-----------------------------------
+	function openOrColseModule(moduleId ,imgId){
+		var bool = $("#module"+moduleId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#module"+moduleId).toggleClass('div-display');
+	}
+	//-----------------------------------
+	function openOrColseInterfac(interfacId ,imgId){
+		var bool = $("#interfac"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#interfac"+interfacId).toggleClass('div-display');
+	}
+	
+	//-----------------------------------
+	function openOrCloseParameter(interfacId ,imgId){
+		var bool = $("#parameter"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#parameter"+interfacId).toggleClass('div-display');
+	}
+	//-----------------------------------
+	function openOrCloseExample(interfacId ,imgId){
+		var bool = $("#example"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#example"+interfacId).toggleClass('div-display');
+	}
+	//-----------------------------------
+	function openOrCloseTry(interfacId,imgId){
+		var bool = $("#try"+interfacId).hasClass('div-display');
+		if(bool){ 
+			$("#"+imgId).attr("src","../images/down.png");
+		}else{
+			$("#"+imgId).attr("src","../images/left.png");
+		}
+		$("#try"+interfacId).toggleClass('div-display');
+	}
+	
+	// -------------------------------------
+	
+	function changeUrl(interfacId,type){
+		if(type=="JSON"){
+			$("#url-"+interfacId).val($("#input"+interfacId).val());	
+		}else{
+			
+		$("#form"+interfacId).attr("action",$("#input"+interfacId).val());
+		}
+	}
+	
+	
+	//--------------------------------------------------------------------
+	    $("[data-toggle=popover]").popover();
+	        
+	 //----------------------------
+	 
+	</script>
+
+</body>
+
+</html>

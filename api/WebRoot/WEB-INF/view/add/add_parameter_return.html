@@ -1,0 +1,78 @@
+<div id="example-parameter${example.exampleId}"class="col-lg-12 div-display">
+	<div class="panel panel-default  ">
+		<div class="panel-heading">添加返回值参数说明</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-lg-12">
+					<form role="form">
+						<div class="form-group">
+							<input class="form-control" id="${example.exampleId}parameterName" placeholder="参数名称">
+						</div>
+						<div class="form-group">
+							<input class="form-control" id="${example.exampleId}parameterCode" placeholder="参数代码">
+						</div>
+						<div class="form-group">
+
+							<select onchange="chooseDataType(this,'${example.exampleId}');" class="form-control" id="${example.exampleId}parameterDataType" placeholder="数据类型">
+								<!-- <option value="String">-- 请选择数据类型 --</option> -->
+								<option value="String">String</option>
+								<option value="int">int</option>
+								<option value="Date">Date</option>
+								<option value="bool">bool</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<input class="form-control" id="${example.exampleId}minLength" placeholder="最小长度" value="1">
+						</div>
+						<div class="form-group">
+							<input onchange="choosMaxLength('${example.exampleId}');" class="form-control" id="${example.exampleId}maxLength" placeholder="最大长度" value="2">
+						</div>
+						<div id = "div-example-${example.exampleId}" class="form-group">
+							<input class="form-control" id="${example.exampleId}parameterExample" placeholder="示例">
+						</div>
+						<div class="form-group">
+							<span style="margin-left:0px;"><b>是否必须 :</b></span> <input type="radio" name="${example.exampleId}isMust" checked="checked" value="1">必须 <input type="radio" name="${example.exampleId}isMust" value="0">可选
+						</div>
+
+						 
+						<button type="button" onclick="saveEaxmpleRetur('${example.exampleId}');" class="btn btn-default">确定</button>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<button onclick="colse_div('${example.exampleId}')" type="button" class="btn btn-default">取消</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  function chooseDataType(select,exampleId) {
+
+		var dataType = $(select).val();
+		if (dataType != "String") {
+			$("#"+exampleId+"minLength").addClass("div-display");
+			$("#"+exampleId+"maxLength").addClass("div-display");
+		} else {
+			$("#"+exampleId+"minLength").removeClass("div-display");
+			$("#"+exampleId+"maxLength").removeClass("div-display");
+		}
+	}
+  
+  function choosMaxLength(exampleId) {
+
+		var maxLength = $("#"+exampleId+"maxLength").val();
+		var textarea = '<textarea id="parameterExample" class="form-control" rows="3"></textarea>';
+		var inputString = '<input id="parameterExample" class="form-control" placeholder=" ">';
+
+		$("#div-example-"+exampleId).children("input").remove();
+		$("#div-example-"+exampleId).children("textarea").remove();
+		if (maxLength >45) {
+			$("#div-example-"+exampleId).append(textarea);
+		} else {
+			$("#div-example-"+exampleId).append(inputString);
+		}
+	}
+  
+  function colse_div(exampleId){
+	  $("#example-parameter"+exampleId).addClass("div-display");
+  }
+</script>

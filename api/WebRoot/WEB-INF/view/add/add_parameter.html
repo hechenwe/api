@@ -1,0 +1,138 @@
+<div style="margin-left: 0px; width: 100%" class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">添加参数</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<form id="form" role="form">
+							<input type="hidden" id="interfacId" class="form-control">
+							<div class="form-group">
+								<input id="parameterName" class="form-control" placeholder="参数名称">
+								<p class="help-block"></p>
+							</div>
+							<div class="form-group">
+								<input id="parameterCode" class="form-control" placeholder="参数代码">
+							</div>
+							<!-- <div class="form-group">
+								<textarea id="parameterExplain" class="form-control" rows="3" placeholder="参数说明"></textarea>
+							</div> -->
+							<div class="form-group">
+
+								<select class="form-control" id="parameterDataType" onchange="chooseDataType(this);" placeholder="数据类型">
+									<option value="String">--请选择数据类型--</option>
+									<option value="String">String</option>
+									<option value="Integer">Integer</option>
+									<option value="Long">Long</option>
+									<option value="Date">Date</option>
+									<option value="File">File</option>
+								</select>
+							</div>
+							<div id="div-minLength" class="form-group">
+								<input id="minLength" class="form-control" placeholder="最小长度 " value="1">
+							</div>
+							<div id="div-maxLength" class="form-group">
+								<input onchange="choosMaxLength(this);" id="maxLength" class="form-control" placeholder="最大长度 " value="1">
+							</div>
+							<div id="div-example" class="form-group">
+								<input id="parameterExample" class="form-control" placeholder="示例">
+							</div>
+							<div class="form-group">
+								<small><b>是否必须</b></small> <label class="radio-inline"> <input type="radio" name="isMust" value="1" checked><small>必须</small>
+								</label> <label class="radio-inline"> <input type="radio" name="isMust" value="0"><small>可选</small>
+								</label>
+							</div>
+							<!-- <div class="form-group">
+								<input id="weight" class="form-control" placeholder="权重  用于排序">
+							</div> -->
+							<button onclick="saveParameter();" type="button" class="btn btn-default">确定</button>
+							<button type="reset" class="btn btn-default">重置</button>
+							<button type="button" onclick="closeParameterDiv();" class="btn btn-default">关闭</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function chooseDataType(select) {
+
+		var dataType = $(select).val();
+		if (dataType != "String") {
+			$("#div-maxLength").addClass("div-display");
+			$("#div-minLength").addClass("div-display");
+		} else {
+			$("#div-maxLength").removeClass("div-display");
+			$("#div-minLength").removeClass("div-display");
+		}
+	}
+
+	function choosMaxLength(input) {
+
+		var maxLength = $(input).val();
+		var textarea = '<textarea id="parameterExample" class="form-control" rows="3"></textarea>';
+		var inputString = '<input id="parameterExample" class="form-control" placeholder=" ">';
+
+		$("#div-example").children("input").remove();
+		$("#div-example").children("textarea").remove();
+		if (maxLength > 11) {
+			$("#div-example").append(textarea);
+		} else {
+			$("#div-example").append(inputString);
+		}
+	}
+	//-----------------------------------------------------保存保存参数----------------------------------------------
+	function saveParameter() {
+		var projectId = $("#input_projectId").val();
+		var interfacId = $("#interfacId").val();
+	 
+		var parameterId = Math.uuid();//.replace(/-/gm,'');
+		var parameterName = $("#parameterName").val();
+		var parameterCode = $("#parameterCode").val();
+		var minLength = $("#minLength").val();
+		var maxLength = $("#maxLength").val();
+		var parameterExample = $("#parameterExample").val();
+		var parameterExplain = $("#parameterExplain").val();
+		var weight = $("#weight").val();
+		var parameterDataType = $("#parameterDataType").val();
+		var isMust = $('input[name="isMust"]:checked').val();
+
+		var urlString = "../parameter/saveParameter.html?projectId=" + projectId;
+		urlString = urlString + "&interfacId=" + interfacId + "&parameterId=" + parameterId + "&parameterName=" + parameterName + "&parameterCode=" + parameterCode + "&minLength=" + minLength;
+		urlString = urlString + "&maxLength=" + maxLength + "&parameterExample=" + parameterExample + "&parameterExplain=" + parameterExplain + "&weight=" + weight;
+		urlString = urlString + "&parameterDataType=" + parameterDataType + "&isMust=" + isMust;
+		//alert(urlString);
+
+		$.get(urlString, function(data) {
+
+			if (data == "1") {//添加成功
+				var tr = '<tr id="tr-'+parameterId+'">' + '<td>' + parameterName + '</td>' + '<td>' + parameterCode + '</td>' + '<td>' + parameterDataType + '</td>' +
+
+				'<td>' + minLength + ' - ' + maxLength + '</td>' + '<td> ' + parameterExample + '</td>' + '<td>' + '<div class="col-lg-8">' + '<select id="select_'+parameterId+'" class="form-control input-sm div-display ">' + '</select>' + '</div class="col-lg-4"> <img onclick="divDisplay(\'' + interfacId + '\',\'' + parameterId + '\');" src="../images/add.png">' + '</div>' + '</td>' + 
+				'<td>' + 
+				'<p onclick="updateParameter2(\''+ parameterId + '\',\''+ interfacId + '\');" style="color:#627CBE;" class="fa fa fa-edit"></p>'+
+				'&nbsp;&nbsp;&nbsp;&nbsp;<p onclick="deleteParameter(\''+ parameterId + '\');" style="color:#627CBE;" class="fa fa-trash-o"></p>' + 
+				'</td>' + 
+				
+				'</tr>';
+
+				$("#tbody-" + interfacId).append(tr);
+				//alert("保存参数成功!");
+				var forms = $("#form");
+				for (var i = 0; i < forms.length; i++) {
+					forms[i].reset();
+
+				}
+			}
+
+		})
+	}
+
+	function closeParameterDiv() {
+		var interfacId = $("#interfacId").val();
+		$("#div_parameter" + interfacId).toggleClass('div-display');
+
+	}
+</script>
+

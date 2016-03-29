@@ -1,0 +1,30 @@
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">添加JSON格式的参数</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<form role="form">
+                            <input  type="hidden" id="interfacId" class="form-control">
+                            <input  type="hidden" id="parameterName" class="form-control" value="JSON格式的参数">
+							<input  type="hidden" id="parameterCode" class="form-control" value="jsonString">
+							<input  type="hidden" id="parameterExplain" class="form-control" value="必须保证是标准的JSON格式">
+							<input  type="hidden" id="parameterDataType" class="form-control" value="String">
+							<input  type="hidden" id="minLength" class="form-control" value="1">
+							<input  type="hidden" id="maxLength" class="form-control" value="10000">
+							<input  type="hidden" id="isMust" class="form-control" value="1">
+							<input  type="hidden" id="weight" class="form-control" value="1">
+							<div class="form-group">
+								<label>参数示例</label>
+								<textarea id="parameterExample" class="form-control" rows="15"></textarea>
+							</div>
+							<button onclick="saveParameter();" type="button" class="btn btn-default">确定</button>
+							<button type="reset" class="btn btn-default">重置</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

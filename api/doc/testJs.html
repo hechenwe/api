@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>上传图片</title>
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+   <title>无标题页</title>
+       
+</head>
+<body onLoad="setTimeout('count()',10);">
+ 
+<input type="text" onkeydown ="onChangLength(this);";onkeyup = "onChangLength(this);"  onchange = "onChangLength(this);"   size="0" length="0"  > 
+ <script>
+ 
+    
+   
+  function onChangLength(input){
+  var string = input.value;
+  console.log(string);
+  var length = getLength(string);
+  input.size=length;
+  
+  }
+	 
+  function  getLength(str) { 
+	///获得字符串实际长度，中文2，英文1 
+	///要获得长度的字符串 
+	var realLength = 0, len = str.length, charCode = -1; 
+	for (var i = 0; i < len; i++) { 
+	charCode = str.charCodeAt(i); 
+	if (charCode >= 0 && charCode <= 128) 
+	realLength += 1; 
+	else realLength += 2; 
+	} 
+	return realLength; 
+};
+    
+</script>
+    
+</body>
+</html>
+ 

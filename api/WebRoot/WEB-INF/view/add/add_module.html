@@ -1,0 +1,48 @@
+<div class="row">
+				<div style="height:15px;"  class="col-lg-12"></div>
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<!-- <div class="panel-heading">编辑模块</div> -->
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<form role="form">
+									    <input type="hidden" id="projectId" > 
+										<div class="form-group">
+											<label>模块名称</label> <input onkeyup="v_module_name();" onkeydown="v_module_name();" id="moduleName"  class="form-control" placeholder="1到8个字符">
+											<p class="help-block"></p>
+										</div>
+										<!-- <div class="form-group">
+											<label>模块代码</label> <input id="moduleCode"  class="form-control" placeholder="">
+										</div>
+										<div class="form-group">
+											<label>模块简介</label>
+											<textarea id="moduleIntro"  class="form-control" rows="3"></textarea>
+										</div> -->
+										<!-- <div class="form-group">
+											<label>权重</label> <input id="weight" class="form-control" placeholder="">
+										</div> -->
+									<button id="button_save" type="button" disabled="disabled" onclick="saveModule();" class="btn btn-default">确定</button>
+									<button  type="button"   onclick="toAddModule();" class="btn btn-default">取消</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<script type="text/javascript">
+ function v_module_name(){
+	var id = $("#moduleName").val();
+	var length = id.length;
+		 
+	if(length>=1 && length <=8){
+	   $("#button_save").removeAttr("disabled");
+	}else{
+		$("#button_save").attr("disabled","disabled");
+	}
+	
+ }
+  
+</script>

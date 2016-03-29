@@ -1,0 +1,75 @@
+@CHARSET "UTF-8";
+
+.main-top {
+	position: fixed;
+	z-index: 999;
+	top: 0;
+	filter: alpha(opacity = 80);
+	-moz-opacity: 0.8;
+	-khtml-opacity: 0.8;
+	opacity: 1;
+	height: 50px;
+	width: 100%;
+	text-align: left;
+}
+ 
+ .main-top1 {
+	position: fixed;
+	z-index: 999;
+	top: 50px;
+	height:100%;
+	width: 23.666667%;
+	text-align: left;
+	/* overflow: auto; */
+}
+.span-2 {
+	text-indent: 2em;
+}
+
+.span-4 {
+	text-indent: 4em;
+}
+
+.span-6 {
+	text-indent: 6em;
+}
+
+.span-8 {
+	text-indent: 8em;
+}
+
+.input-non {
+	border-style: none
+}
+
+img {
+	margin-bottom: 2px;
+	height: 14px;
+	width: 14px;
+}
+
+.img {
+	margin-bottom: 2px;
+	height: 10px;
+	width: 8px;
+}
+
+.div-display {
+	display: none
+}
+
+a {
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.font-col{
+	 
+	color: #337ab7;
+}
+ 

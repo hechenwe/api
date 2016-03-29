@@ -1,0 +1,49 @@
+
+<div  style="margin-left: 30px;"> 
+             <div id = "div-intface-${moduleId}">                 
+             <#if  interfaces ??><!-- 接口 if-->
+                      <#list  interfaces as interfac ><!-- 接口 list-->
+                            <h5 id = "h5-${interfac.interfacId}"><img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a>
+                             <div   class="btn-group  ">
+				                 <!--  <p style="color:#BABABA;" class="fa fa-gear"  data-toggle="dropdown" aria-expanded="false"> -->
+				                  <p onclick="editInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p>
+				                  <p onclick="deleteInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-trash-o"></p>
+				                  <#if  interfac_index != 0>
+				                    <p onclick="upOrdownInterface('up','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-angle-double-up"></p> 
+				                    </#if>
+				                    <#if   interfac_has_next>
+				                    <p onclick="upOrdownInterface('down','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-angle-double-down"></p> 
+				                    </#if>
+				                 <!--  <ul class="dropdown-menu pull-left" role="menu">
+				                    <li style="margin-left:15px;"><p onclick="editInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p></li>
+				                    <li style="margin-left:15px;"><p onclick="deleteInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-trash-o"></p></li>
+				                    <#if  interfac_index != 0>
+				                    <li style="margin-left:18px;"><p onclick="upOrdownInterface('up','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-long-arrow-up"></p></li>
+				                    </#if>
+				                    <#if   interfac_has_next>
+				                    <li style="margin-left:18px;"><p onclick="upOrdownInterface('down','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-long-arrow-down"></p></li>
+				                    </#if>
+				                  </ul> -->
+				                  </div>
+                            
+                            </h5> 
+                            <div id="interfac${interfac.interfacId}" class="div-display">
+                            
+                            </div>
+                             <div class="div-display"  style="margin-left:12px;" id="div-${interfac.interfacId}"  >
+		                      
+			                 </div>
+                            
+                            <hr id = "hr-${interfac.interfacId}" style="height:1px;border:none;border-top:1px dashed #B2B8BD;" />
+                  </#list><!-- 接口list-->
+           </#if><!-- 接口if-->
+           </div>
+           <div>
+	           <button type="button" onclick="toAddInterface('${moduleId}');" class="btn btn-outline btn-primary btn-xs">&nbsp;添加接口&nbsp;</button>
+	           <div style="height:15px;"></div>
+	           <div class="div-display"  style="margin-left:12px;" id="div_interfac${moduleId}"  >
+		           <#include "../add/add_interface.html"/>
+			   </div>
+		  </div>
+           
+</div>         

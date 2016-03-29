@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../images/I.png" type="image/x-icon">
+<title>所有项目</title> <#include "com/css.html"/>
+<style type="text/css">
+</style>
+</head>
+
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-static-top main-top " role="navigation" style="margin-bottom: 0;"><#include "com/header.html"/></nav>
+
+	<div class="col-lg-12">
+		<div style="height: 75px;" class="col-lg-12"></div>
+		<div class="col-lg-12">
+
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						可以给  <a>${userName}</a> 分配权限的所有项目:  <a href="../companyController/user.html" style="float:right;">返回</a>
+					</div>
+					<div class="panel-body">
+						<div class="dataTable_wrapper">
+							<div style="height: 470px;" id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+								 
+								<div class="row">
+									<div class="col-sm-12">
+										<table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+											<thead>
+												<tr role="row">
+													<th class=" " style="width: 5%;">编号</th>
+													<th class=" " style="width: 170px;">项目名称</th>
+												    <th class=" "  style="width: 202px;">项目代码</th> 
+													<th class=" " style="width: 148px;">创建日期</th>
+													<th class=" " style="width:12%;">状态</th>
+													<th class=" " style="width: 109px;">分配权限</th>
+												</tr>
+											</thead>
+											<tbody>
+												<#if projects ??> 
+												
+												<#list projects as p>
+
+												<tr class="gradeA odd" role="row">
+													<td class="">${p_index + 1}</td>
+													<td class=""><a>${p.projectName}</a> </td>
+												    <td class=""><a>${p.projectCode}</a></td>  
+													 
+													<td class="center">${p.creatDate?string("yyyy-MM-dd")}</td>
+													<td class="center">已发布</td>
+													<td class="center sorting_1">
+													<div class="form-group">
+                                                        <#if controles ? size != 0> 
+			                                                        <#list controles as c >
+			                                                        
+			                                                        <#if p.projectId == c.projectId> <!-- 已经分配  -->
+			                                                        
+					                                                        <#if c.operationId == "643D6526E23F4FF8A241499531144195" > <!-- 编辑  -->
+					                                                        
+					                                                        <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="NULL" >无权限
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input checked="checked" type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="EDIT" >编辑
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="LOOK" >查看
+								                                            </label>
+					                                                        
+					                                                        <#elseif c.operationId == "8DAF951448FD4B73ADE2D86571F673EB"><!--查看  -->
+					                                                        <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="NULL" >无权限
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="EDIT" >编辑
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input checked="checked" type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="LOOK" >查看
+								                                            </label>
+					                                                        <#else><!-- 无权限 -->
+					                                                        <label class="radio-inline">
+								                                                <input checked="checked" type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="NULL" >无权限
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="EDIT" >编辑
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="LOOK" >查看
+								                                            </label>
+					                                                        </#if>
+					                                                        <#break>
+			                                                        <#else><!-- 没有分配  -->
+			                                                        
+			                                                                <#if !c_has_next>
+					                                                        <label class="radio-inline">
+								                                                <input checked="checked" type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="NULL" >无权限
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="EDIT" >编辑
+								                                            </label>
+								                                            <label class="radio-inline">
+								                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="LOOK" >查看
+								                                            </label>
+			                                                                </#if>
+			                                                                
+			                                                        </#if>
+			                                                        
+			                                                        </#list>
+                                                        <#else>
+                                                         <label class="radio-inline">
+				                                                <input checked="checked" type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="NULL" >无权限
+				                                            </label>
+				                                            <label class="radio-inline">
+				                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="EDIT" >编辑
+				                                            </label>
+				                                            <label class="radio-inline">
+				                                                <input type="radio" onchange="onch('${p.projectId}','${p.projectCode}');" name="${p.projectCode}" id="" value="LOOK" >查看
+				                                            </label>
+                                                        </#if>
+                                                        
+                                                        
+                                                        
+			                                           
+			                                             
+                                                  </div>
+													</td>
+
+												</tr>
+
+												</#list> 
+												
+												</#if>
+
+
+											</tbody>
+										</table>
+										 
+									</div>
+								</div>
+								 
+ 
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+
+	</div>
+
+	<#include "com/js.html"/>
+	<script type="text/javascript">
+	function onch(projectId,projectCode) {
+		 var  userId = "${userId}";
+		 var operationCode = $('input[name="'+projectCode+'"]:checked').val();
+		 var url = "../userController/settingRole.html?userId="+userId+"&projectId="+projectId + "&operationCode="+operationCode;
+		 
+		 $.get(url,function (data){
+			 
+			 //alert(data);
+		 })
+	 }
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../images/I.png" type="image/x-icon">
+<title>所属公司</title> <#include "com/css.html"/>
+<style type="text/css">
+.file {
+	position: relative;
+	display: inline-block;
+	background: #D0EEFF;
+	border: 1px solid #99D3F5;
+	border-radius: 4px;
+	padding: 4px 12px;
+	overflow: hidden;
+	color: #1E88C7;
+	text-decoration: none;
+	text-indent: 0;
+	line-height: 20px;
+}
+
+.file input {
+	position: absolute;
+	font-size: 100px;
+	right: 0;
+	top: 0;
+	opacity: 0;
+}
+
+.file:hover {
+	background: #AADFFD;
+	border-color: #78C3F3;
+	color: #004974;
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-static-top main-top " role="navigation" style="margin-bottom: 0;"><#include "com/header.html"/></nav>
+
+	<div class="col-lg-12">
+		<div style="height: 55px;" class="col-lg-12"></div>
+		<div class="col-lg-12">
+
+			<div class="col-lg-2"></div>
+			<div class="col-lg-8">
+				<div style="height: 620px;">
+					<h2>入门简介</h2>
+					<p>Interface Word 是一个在线编辑，在线查看，在线调试接口的一个平台，志在您能像编辑Word文档一样编辑您的接口文档，与此同时，还能在线调试您提供的接口, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>
+
+    <#if user.role.roleCode == "ADMIN">
+			 
+					<p>
+						<a><small>添加用户</small></a>
+					</p>
+
+					<p>
+						<a><small>创建项目</small></a>
+					</p>
+	</#if>
+				</div>
+					
+
+
+			</div>
+			<div class="col-lg-2"></div>
+
+		</div>
+
+	</div>
+
+	<#include "com/js.html"/>
+	<script type="text/javascript">
+	 
+	
+	</script>
+
+</body>
+
+</html>

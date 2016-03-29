@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../images/I.png" type="image/x-icon">
+<title>所属公司</title> <#include "com/css.html"/>
+<style type="text/css">
+</style>
+</head>
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-static-top main-top " role="navigation" style="margin-bottom: 0;"><#include "com/header.html"/></nav>
+
+	<div class="col-lg-12">
+		<div style="height: 75px;" class="col-lg-12"></div>
+		 
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading"><a>${user.company.companyName}</a> 所有用户</div>
+				 
+				<div class="panel-body">
+					<div class="dataTable_wrapper">
+						<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+							 
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+										<thead>
+											<tr role="row">
+												<th class=" "  style="width:5%;">编号</th>
+												<th class=" "  style="width: 170px;">用户名</th>
+												<th class=" "  style="width: 202px;">电子邮件</th>
+												<th class=" "  style="width: 185px;">角色</th>
+												<th class=" "  style="width: 12%;">注册日期</th>
+												<th class=" "  style="width: 25%;">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+										<#if users ??>
+										<#list users as u>
+										   <#if u.userName != user.userName >
+										   <tr class="gradeA odd" role="row">
+												<td class="">${u_index + 1}</td>
+												<td class="">${u.userName}</td>
+												<td class="">${u.email}</td>
+												<td class="">${u.role.roleName}</td>
+												<td class="center">${u.registerDate?string("yyyy-MM-dd")}</td>
+												<td class="center sorting_1">
+												 <a class="btn btn-primary btn-xs">修改</a>&nbsp;&nbsp;
+												 <a class="btn btn-success btn-xs">查看</a>&nbsp;&nbsp;
+												 <a class="btn btn-info btn-xs" href="../userController/toRole.html?userId=${u.userId}&userName=${u.userName}">权限</a>&nbsp;&nbsp;
+												 <a class="btn btn-default btn-xs" onclick="deleteUser('${u.userId}')">删除</a>
+												 
+												 </td>
+											</tr>
+										   </#if>
+										</#list>
+										</#if>
+										 
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<!-- <div class="col-sm-6">
+									<div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+								</div> -->
+								<!-- <div class="col-sm-6">
+									<div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+										<ul class="pagination">
+											<li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="#">上一页</a></li>
+											<li class="paginate_button active" aria-controls="dataTables-example" tabindex="0"><a href="#">1</a></li>
+											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">2</a></li>
+											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">3</a></li>
+											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">4</a></li>
+											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">5</a></li>
+											<li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">6</a></li>
+											<li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="#">下一页</a></li>
+										</ul>
+									</div>
+								</div> -->
+							</div>
+							
+							<div>
+									<a onclick="display();">添加用户</a> <br>
+									<br>
+									<div id = "div-add-project" class="div-display">
+										<input  id="userName" class="form-control" placeholder="用户名" onchange="haveProjectName();">&nbsp;&nbsp;
+										<input  id="email" class="form-control" placeholder="Email(用于修改密码)" onchange="haveProjectName();">&nbsp;&nbsp;
+										<input  id="password" class="form-control" placeholder="登录密码" onchange="haveProjectName();">&nbsp;&nbsp;
+										<button type="button" onclick="addUser();" class="btn btn-primary btn-sm">确定</button>&nbsp;&nbsp;
+										<button type="button" onclick="display();" class="btn btn-default btn-sm">取消</button>
+									</div>
+								</div>
+						</div>
+					</div>
+					 
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<#include "com/js.html"/>
+	<script type="text/javascript">
+	
+	    //显示 和 隐藏 添加项目的div
+		function display(){
+			$("#div-add-project").toggleClass('div-display');
+		}
+		
+		//添加用户
+		function addUser(){
+			var companyId = '${user.company.companyId}'; 
+			var userName = $("#userName").val();
+			var email = $("#email").val();
+			var password = $("#password").val();
+			if(userName == "" || password == ""){
+				 
+				$("#userName").attr("placeholder","不能为空!").fadeIn();
+				$("#password").attr("placeholder","不能为空!").fadeIn();
+				  setTimeout(
+				      function () {
+				    	          $("#userName").attr("placeholder","用户名");
+				    	          $("#password").attr("placeholder","登录密码");
+				                  }, 1500);
+				 
+				return;
+			}
+			
+			
+			var url = "../companyController/saveUser.html?companyId="+companyId + "&userName="+userName + "&email="+email + "&password="+password;
+		    $.get(url,function (data){
+		    	 
+		    	window.location.reload();
+		    })
+			
+		}
+		
+		
+		//检查是否重命
+		function haveProjectName(){
+			var companyId = '${user.company.companyId}'; 
+			var projectName = $("#projectName").val();
+			var projectCode = $("#projectCode").val();
+			
+			
+			var url = "../project/haveProjectName.html?companyId="+companyId + "&projectName="+projectName + "&projectCode="+projectCode;
+		    $.get(url,function (data){
+		    	
+		    	if(data == "1"){
+		    		$("#projectName").attr("placeholder","不能重命!").fadeIn();
+					$("#projectCode").attr("placeholder","不能重命!").fadeIn();
+					  setTimeout(
+					      function () {
+					    	          $("#projectName").attr("placeholder","项目名称(中文)");
+					    	          $("#projectCode").attr("placeholder","项目代码(英文)");
+					                  }, 1500);
+		    	   $("#projectName").val("");
+		    	   $("#projectCode").val("");
+		    	}
+		    })
+		}
+		
+		function deleteUser (userId){
+			
+			if (confirm("确认要删除？")) {
+			var url = '../companyController/deleteUser.html?userId='+ userId ;
+			$.get(url,function (data){
+				window.location.reload();
+			})
+			}
+		}
+	</script>
+</body>
+</html>

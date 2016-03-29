@@ -1,0 +1,53 @@
+<div class="row">
+				<div style="height:15px;"  class="col-lg-12"></div>
+				<div class="col-lg-6">
+					<div class="panel panel-default">
+						<!-- <div class="panel-heading">编辑模块</div> -->
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<form role="form"   action="../module/updateModule.html" method="get">
+									    <input type="hidden" id="${module.moduleId}projectId"  value="${module.projectId}" > 
+									    <input type="hidden" id="${module.moduleId}moduleId"  value="${module.moduleId}" > 
+										<div class="form-group">
+											<label>模块名称</label> <input id="${module.moduleId}moduleName" class="form-control" value="${module.moduleName}">
+											<p class="help-block"></p>
+										</div>
+										<!-- <div class="form-group">
+											<label>模块代码</label> <input id="${module.moduleId}moduleCode"  class="form-control" value="${module.moduleCode}">
+										</div>
+										<div class="form-group">
+											<label>模块简介</label>
+											<textarea id="${module.moduleId}moduleIntro"  class="form-control" rows="3">${module.moduleIntro}</textarea>
+										</div> -->
+									<button type="button" onclick="updateModule('${module.moduleId}');" class="btn btn-default">确定</button>
+									<button type="button" onclick="colseModuleDiv('${module.moduleId}');"  class="btn btn-default">取消</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+	
+	function updateModule(moduleId){
+		var projectId = $("#"+moduleId+"projectId").val();
+		var moduleId = $("#"+moduleId+"moduleId").val();
+		var moduleName = $("#"+moduleId+"moduleName").val();
+		var moduleCode = $("#"+moduleId+"moduleCode").val();
+		var moduleIntro = $("#"+moduleId+"moduleIntro").val();
+		var url = '../module/updateModule.html';
+		url = url + '?projectId='+projectId+
+				'&moduleId='+moduleId +
+				'&moduleName='+moduleName+ 
+				'&moduleCode='+moduleCode+ 
+				'&moduleIntro='+moduleIntro;
+		$.get(url ,function (data){
+			  window.location.reload();//刷新当前页面.
+		})
+		
+		
+	}
+	
+	</script>
