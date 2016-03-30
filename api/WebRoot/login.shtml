@@ -13,55 +13,21 @@
 <link href="/api/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="/api/css/signin.css" rel="stylesheet">
 <link href="signin.css" rel="stylesheet">
-<link rel="icon" href="../images/I.png"  type="image/x-icon">
+<link rel="icon" href="../images/I.png" type="image/x-icon">
 </head>
 
 <body>
 	<div style="height: 30px;" class="col-lg-12"></div>
-	<!-- 头部 -->
-	<div class="col-lg-12">
-		<div class="col-lg-8">
+	<div class="col-lg-4"></div>
+	<div class="panel panel-default col-lg-4">
+		<form action="/api/indexController/login.html" class="form-signin" method="post">
+			<h3 class="form-signin-heading">登录系统</h3>
+			<br> <input name="userName" type="text" class="form-control" placeholder="" required autofocus> <br> <input type="password" name="password" class="form-control" placeholder="Password" required>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+			<br> <a>忘记密码？</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>忘记用户名？</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href="/api/indexController/register.html">立即注册</a>
 
-			<div id="myCarousel" class="carousel slide">
-				<!-- 轮播（Carousel）指标 -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-				<!-- 轮播（Carousel）项目 -->
-				<div class="carousel-inner">
-					<div class="item active">
-						<img src="/api/images/carousel/1.jpg" alt="First slide">
-						<div class="carousel-caption">标题 1</div>
-					</div>
-					<div class="item">
-						<img src="/api/images/carousel/2.png" alt="Second slide">
-						<div class="carousel-caption">标题 2</div>
-					</div>
-					<div class="item">
-						<img src="/api/images/carousel/1.jpg" alt="Third slide">
-						<div class="carousel-caption">标题 3</div>
-					</div>
-				</div>
-				<!-- 轮播（Carousel）导航 -->
-				<a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a> <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
-			</div>
+		</form>
 
-
-		</div>
-		<div class="col-lg-4 container">
-
-			<form action="/api/indexController/login.html" class="form-signin" method="post">
-				<h4 class="form-signin-heading">登录系统</h4>
-				<br> <input name="userName" type="text" class="form-control" placeholder="" required autofocus> <br> <input type="password" name="password" class="form-control" placeholder="Password" required>
-
-
-				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-				<br> <a>忘记密码？</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>忘记用户名？</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href="/api/indexController/register.html">立即注册</a>
-
-			</form>
-		</div>
 	</div>
 
 </body>
