@@ -170,5 +170,21 @@ public class ProjectController {
 		}
 
 	}
+	
+	
+	/**
+	 * 删除项目文档
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/deleteProject")
+	@ResponseBody
+	public String deleteProject(HttpServletRequest request){
+		String projectId = request.getParameter("projectId");
+		
+		Integer n = projectService.deleteProject(projectId);
+		
+		return n + "";
+	}
 
 }

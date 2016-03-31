@@ -10,7 +10,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-logging-1.1.3.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-pool-1.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/druid-1.0.5.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/freemarker-2.3.19.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/freemarker-2.3.19.jar" sourcepath="E:/repository/org/freemarker/freemarker/2.3.19/freemarker-2.3.19-sources.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-all-1.9.9.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mybatis-3.1.1-SNAPSHOT.jar"/>

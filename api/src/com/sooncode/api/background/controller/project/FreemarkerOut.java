@@ -56,14 +56,7 @@ public class FreemarkerOut {
 			template.process(map, riter);
 			riter.flush();
 			riter.close();
-			
-			//----------------------压缩html代码
-			/*FileUtil fileUtil = new FileUtil();
-			String html = fileUtil.readFile(path+File.separatorChar+projectCode+".html");
-			html = HtmlCompressor.compress(html);
-			fileUtil.writeFile(path+File.separatorChar+projectCode+".html", html, "utf-8");*/
-			
-			
+			 
 		}
 	}
 }

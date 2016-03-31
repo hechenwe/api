@@ -6,14 +6,20 @@
 			<param name="ConversionPattern" value="%-5p %d{MM-dd HH:mm:ss,SSS} %m  (%F:%L) \n" />
 		</layout>
 	</appender>
-	<logger name="java.sql">
-		<level value="debug" />
-	</logger>
-	<logger name="org.apache.ibatis">
-		<level value="info" />
-	</logger>
+	<appender name="STDOUT"  class="org.apache.log4j.DailyRollingFileAppender">  
+        <param name="Threshold" value="info"></param>   <!-- 日志级别 -->
+        <param name="ImmediateFlush" value="true"></param>  
+        <param name="File" value="${catalina.home}/logs/api/api.log"></param>  <!-- 日志文件 存放位置 -->
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>  
+        <layout class="org.apache.log4j.PatternLayout">  
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>  
+        </layout>  
+    </appender>   
+	 
 	<root>
 		<level value="info" />
 		<appender-ref ref="STDOUT" />
 	</root>
 </log4j:configuration>
+
+ 

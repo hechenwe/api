@@ -7,16 +7,17 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../images/I.png" type="image/x-icon">
- 
+
+
 <title>所有项目</title> <#include "com/css.html"/>
- 
+
 </head>
 
 <body>
 	<!-- Navigation -->
 	<nav class="navbar navbar-default navbar-static-top main-top " role="navigation" style="margin-bottom: 0;"><#include "com/header.html"/></nav>
 
-	<div class="col-lg-12">
+	<div   class="col-lg-12">
 		<div style="height: 75px;" class="col-lg-12"></div>
 		<div class="col-lg-12">
 
@@ -44,31 +45,33 @@
 												<tr role="row">
 													<th class=" " style="width: 5%;">编号</th>
 													<th class=" " style="width: 170px;">项目名称</th>
-												    <th class=" "  style="width: 202px;">项目代码</th> 
+													<th class=" " style="width: 202px;">项目代码</th>
 													<!-- <th class=" " style="width: 185px;">接口数量</th> -->
 													<th class=" " style="width: 148px;">创建日期</th>
-													<th class=" " style="width:12%;">状态</th>
+													<th class=" " style="width: 12%;">状态</th>
 													<th class=" " style="width: 109px;">操作</th>
 												</tr>
 											</thead>
 											<tbody>
 												<#if projects ??> <#list projects as p>
 
-												<tr class="gradeA odd" role="row">
+												<tr   class="gradeA odd" role="row">
 													<td class="">${p_index + 1}</td>
-													<td class=""><a href="../project/${p.projectCode}.shtml">${p.projectName}</a> </td>
-												    <td class=""><a href="../project/${p.projectCode}.shtml">${p.projectCode}</a></td>  
+													<td class=""><a href="../project/${p.projectCode}.shtml">${p.projectName}</a></td>
+													<td class=""><a href="../project/${p.projectCode}.shtml">${p.projectCode}</a></td>
 													<!-- <td class="">12</td> -->
 													<td class="center">${p.creatDate?string("yyyy-MM-dd")}</td>
 													<td class="center">已发布</td>
 													<td class="center sorting_1">
-													<a class="btn btn-success btn-xs" href="../project/${p.projectCode}.shtml">查看</a>&nbsp;&nbsp;&nbsp;&nbsp;
-													<#if user.role.roleCode == "ADMIN"> 
-													<a id ="a-${p.projectId}" class="btn btn-info btn-xs spinner-loader" onclick="releaseProjectApi('${p.projectId}')">发布</a>&nbsp;&nbsp;&nbsp;&nbsp; 
-													
-													<a class="btn btn-primary btn-xs" href="../project/edIndex.html?projectId=${p.projectId}">编辑 </a>&nbsp;&nbsp;&nbsp;&nbsp; 
-													<a class="btn btn-default btn-xs" href="../project/deIndex.html?projectId=${p.projectId}">删除 </a> 
-													</#if> 
+														<a class="btn btn-success btn-xs" href="../project/${p.projectCode}.shtml">查看</a>
+														&nbsp;&nbsp;&nbsp;&nbsp; 
+														<#if user.role.roleCode == "ADMIN"> 
+														<a class="btn btn-primary btn-xs" href="../project/edIndex.html?projectId=${p.projectId}">编辑 </a>
+														&nbsp;&nbsp;&nbsp;&nbsp; 
+														<a id="a-${p.projectId}" class="btn btn-info btn-xs spinner-loader" onclick="releaseProjectApi('${p.projectId}')">发布</a>
+														&nbsp;&nbsp;&nbsp;&nbsp; 
+														<a class="btn btn-default btn-xs" onclick="deleteProject('${p.projectId}')">删除 </a> 
+														</#if>
 													</td>
 
 												</tr>
@@ -99,18 +102,17 @@
 									</div>
 								</div>
 							</div> -->
-							<#if user.role.roleCode == "ADMIN"> 
+								<#if user.role.roleCode == "ADMIN">
 								<div>
-									<a onclick="display();">创建新项目</a> <br>
-									<br>
-									<div id = "div-add-project" class="div-display">
-										<input  id="projectName" class="form-control" placeholder="项目名称(中文)" onchange="haveProjectName();">&nbsp;&nbsp;
-										<input  id="projectCode" class="form-control" placeholder="项目代码(英文)" onchange="haveProjectName();">&nbsp;&nbsp;
-										<button type="button" onclick="addProject();" class="btn btn-primary btn-sm">确定</button>&nbsp;&nbsp;
+									<a onclick="display();">创建新项目</a> <br> <br>
+									<div id="div-add-project" class="div-display">
+										<input id="projectName" class="form-control" placeholder="项目名称(中文)" onchange="haveProjectName();">&nbsp;&nbsp; <input id="projectCode" class="form-control" placeholder="项目代码(英文)" onchange="haveProjectName();">&nbsp;&nbsp;
+										<button type="button" onclick="addProject();" class="btn btn-primary btn-sm">确定</button>
+										&nbsp;&nbsp;
 										<button type="button" onclick="display();" class="btn btn-default btn-sm">取消</button>
 									</div>
 								</div>
-                            </#if>
+								</#if>
 							</div>
 						</div>
 
@@ -124,85 +126,96 @@
 
 
 	</div>
- 
- 
+
+
 
 	<#include "com/js.html"/>
+	<script src="../js/bootstrap-contextmenu.js"></script>
 	<script type="text/javascript">
-	
-	    //显示 和 隐藏 添加项目的div
-		function display(){
+		//显示 和 隐藏 添加项目的div
+		function display() {
 			$("#div-add-project").toggleClass('div-display');
 		}
-		
+
 		//保存项目
-		function addProject(){
-			var companyId = '${user.company.companyId}'; 
+		function addProject() {
+			var companyId = '${user.company.companyId}';
 			var projectName = $("#projectName").val();
 			var projectCode = $("#projectCode").val();
-			if(projectName == "" || projectCode == ""){
-				 
-				$("#projectName").attr("placeholder","不能为空!").fadeIn();
-				$("#projectCode").attr("placeholder","不能为空!").fadeIn();
-				  setTimeout(
-				      function () {
-				    	          $("#projectName").attr("placeholder","项目名称(中文)");
-				    	          $("#projectCode").attr("placeholder","项目代码(英文)");
-				                  }, 1500);
-				 
+			if (projectName == "" || projectCode == "") {
+
+				$("#projectName").attr("placeholder", "不能为空!").fadeIn();
+				$("#projectCode").attr("placeholder", "不能为空!").fadeIn();
+				setTimeout(function() {
+					$("#projectName").attr("placeholder", "项目名称(中文)");
+					$("#projectCode").attr("placeholder", "项目代码(英文)");
+				}, 1500);
+
 				return;
 			}
-			
-			
-			var url = "../project/saveProject.html?companyId="+companyId + "&projectName="+projectName + "&projectCode="+projectCode;
-		    $.get(url,function (data){
-		    	 
-		    	window.location.reload();
-		    })
-			
+
+			var url = "../project/saveProject.html?companyId=" + companyId + "&projectName=" + projectName + "&projectCode=" + projectCode;
+			$.get(url, function(data) {
+
+				window.location.reload();
+			})
+
 		}
-		
-		
+
+		//删除工程文档
+		function deleteProject(projectId) {
+
+			if (confirm("确认要删除？")) {
+				var url = "../project/deleteProject.html?projectId=" + projectId;
+				$.get(url, function(data) {
+					window.location.reload();
+				})
+			}
+		}
+
 		//检查是否重命
-		function haveProjectName(){
-			var companyId = '${user.company.companyId}'; 
+		function haveProjectName() {
+			var companyId = '${user.company.companyId}';
 			var projectName = $("#projectName").val();
 			var projectCode = $("#projectCode").val();
-			
-			
-			var url = "../project/haveProjectName.html?companyId="+companyId + "&projectName="+projectName + "&projectCode="+projectCode;
-		    $.get(url,function (data){
-		    	
-		    	if(data == "1"){
-		    		$("#projectName").attr("placeholder","不能重命!").fadeIn();
-					$("#projectCode").attr("placeholder","不能重命!").fadeIn();
-					  setTimeout(
-					      function () {
-					    	          $("#projectName").attr("placeholder","项目名称(中文)");
-					    	          $("#projectCode").attr("placeholder","项目代码(英文)");
-					                  }, 1500);
-		    	   $("#projectName").val("");
-		    	   $("#projectCode").val("");
-		    	}
-		    })
-		}
-		
-		function releaseProjectApi (projectId){
-			var url = '../project/releaseProjectApi.html?projectId='+ projectId ;
-			
-			var img = '<img src="../images/gif/1.gif">';
-			$("#a-"+projectId).text("").append(img);
-			$.get(url,function (data){
-				if(data == "1"){
-					$("#a-"+projectId).empty().text("发布") ;
-					
-				}else{
-					 
+
+			var url = "../project/haveProjectName.html?companyId=" + companyId + "&projectName=" + projectName + "&projectCode=" + projectCode;
+			$.get(url, function(data) {
+
+				if (data == "1") {
+					$("#projectName").attr("placeholder", "不能重命!").fadeIn();
+					$("#projectCode").attr("placeholder", "不能重命!").fadeIn();
+					setTimeout(function() {
+						$("#projectName").attr("placeholder", "项目名称(中文)");
+						$("#projectCode").attr("placeholder", "项目代码(英文)");
+					}, 1500);
+					$("#projectName").val("");
+					$("#projectCode").val("");
 				}
 			})
 		}
+
+		function releaseProjectApi(projectId) {
+			var url = '../project/releaseProjectApi.html?projectId=' + projectId;
+
+			var img = '<img src="../images/gif/1.gif">';
+			$("#a-" + projectId).text("").append(img);
+			$.get(url, function(data) {
+				if (data == "1") {
+					$("#a-" + projectId).empty().text("发布");
+
+				} else {
+
+				}
+			})
+		}
+		
+	 
 	</script>
- 
+
+
+
+
 </body>
 
 </html>

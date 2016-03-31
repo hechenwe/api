@@ -31,17 +31,21 @@ public class ClassCache {
 	}
 
 	public static String getSrc() {
-		String src = "";
-		try {
-			src = Thread.currentThread().getContextClassLoader().getResource("/").getPath() + "";
-			//src = src.substring(0,1);
-			src = src.substring(1,src.length()-1);
-            logger.info("【src】:>"+src+"<");
-		} catch (Exception e) {
-			src = System.getProperty("user.dir") + File.separatorChar + "build"+ File.separatorChar+"classes";
-			logger.info("【src】:"+src);
-		}
-		return src;
+		 
+		String webRoot = System.getProperty("api.root");
+		
+		String classesPath = webRoot +File.separatorChar +"WEB-INF"+ File.separatorChar +"classes";
+		return classesPath;
+//		try {
+//			//src = Thread.currentThread().getContextClassLoader().getResource("/").getPath() + "";
+//			//src = src.substring(1,src.length()-1);
+//			src = File.separatorChar+"root"+File.separatorChar+"tomcat"+File.separatorChar+"webapps"+File.separatorChar+"api"+File.separatorChar+"WEB-INF"+File.separatorChar+"classes";
+//            logger.info("【src】:>"+src+"<");
+//		} catch (Exception e) {
+//			src = System.getProperty("user.dir") + File.separatorChar + "build"+ File.separatorChar+"classes";
+//			logger.info("【src】:"+src);
+//		}
+//		return src;
 	}
 
 	/**
