@@ -129,6 +129,21 @@ public class RObject {
 			this.invokeSetMethod(entry.getKey(), entry.getValue());
 		}
 	}
+	public RObject(Class<?> clas) {
+		 
+		
+		try {
+			this.object = clas.newInstance();
+			Map<String, Object> fields = this.getFiledAndValue();
+			for (Map.Entry<String, Object> entry : fields.entrySet()) {
+				this.invokeSetMethod(entry.getKey(), entry.getValue());
+			}
+			
+		} catch ( Exception e) {
+			 
+			e.printStackTrace();
+		}  
+	}
 
 	/**
 	 * 执行对象的SET方法
