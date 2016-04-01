@@ -1,8 +1,11 @@
 var projectId = $("#input_projectId").val();
 
 //-----------------更新模块信息---------------------
-function editModule(moduleId) {
-
+function editModule() {
+   //id="context-menu" data-key=""
+	
+	var moduleId = $("#context-menu").attr("data-key").split(":")[0];
+	
 	var urlString = '../module/editModule.html?projectId='+projectId+'&moduleId=' + moduleId;
     
 	$.get(urlString, function(data) {
@@ -20,13 +23,14 @@ function colseModuleDiv(moduleId) {
  
  
 //------------------删除模块------------------------
-function deleteModule(moduleId) {
-	
+function deleteModule() {
+	var moduleId = $("#context-menu").attr("data-key").split(":")[0];
 	if (confirm("确认要删除？")) {
 		var url = '../module/deleteModule.html?projectId='+projectId+'&moduleId=' + moduleId;
 		$.get(url,function (data){
 			if(data == "1"){
-				$("#h4-"+moduleId).remove();
+				//$("#h4-"+moduleId).remove();
+				window.location.reload();//刷新当前页面.
 			}else{
 				alert("删除失败!");
 			}
@@ -38,13 +42,27 @@ function deleteModule(moduleId) {
 }
 
 //--------------------移动模块--------------------------------------------------------
-function upOrdownModule(type, moduleId , weight ) {
+function upModule() {
+	    var dataKeys = $("#context-menu").attr("data-key").split(":");
+	    var type = "up";
+	    var moduleId = dataKeys[0];
+	    var weight = dataKeys[1];
 	    var urlString= '../module/upOrdownModule.html?projectId='+projectId+'&moduleId=' + moduleId+'&type='+type +'&weight='+weight;
-		//window.location.href='../module/upOrdownModule.html?projectId='+projectId+'&moduleId=' + moduleId+'&type='+type +'&weight='+weight;
 		$.get(urlString, function(data) {
 			 window.location.reload();//刷新当前页面.
 		})
 		
+}
+function downModule() {
+	var dataKeys = $("#context-menu").attr("data-key").split(":");
+	var type = "down";
+	var moduleId = dataKeys[0];
+	var weight = dataKeys[1];
+	var urlString= '../module/upOrdownModule.html?projectId='+projectId+'&moduleId=' + moduleId+'&type='+type +'&weight='+weight;
+	$.get(urlString, function(data) {
+		window.location.reload();//刷新当前页面.
+	})
+	
 }
 
 

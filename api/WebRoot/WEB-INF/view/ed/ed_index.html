@@ -74,12 +74,45 @@
 	<a class="main-top2" href="../indexController/project.html">
 		<button type="button" class="btn btn-info btn-circle btn-lg"><small style="margin-left:-7px;">返回</small></button>
 	</a>
+	
+ <#-- 右键菜单 -->
+<div id="context-menu" data-key="">
+  <ul class="dropdown-menu" role="menu">
+    <li><a onclick="editModule();" >修改模块</a></li>
+    <li><a onclick="deleteModule();"  >删除模块 </a></li>
+    <li><a onclick="toAddInterface();" >添加接口</a></li>
+    <li id="menu-up"><a onclick="upModule();">向上移动</a></li>
+    <li id="menu-down"><a onclick="downModule();">向下移动</a></li>
+  </ul>
+</div>
+
+
 <!------------------------------------------------JS-----------------------------------------------------------------  -->
  
 	<#include "../com/js.html"/>
 	<#include "../com/openOrCloseJs.html"/>
+	<script type="text/javascript" src="../js/bootstrap-contextmenu.js"></script>
 	<script type="text/javascript">
-		 
+	     //右键菜单 
+	     $('.context').contextmenu();
+	      
+	     //右键菜单 
+	     $('.b').mousedown(function(e){ 
+	          if(3 == e.which){ //这 是右键单击事件
+	        	  var dataKeys = $(this).attr("data-key").split(":");
+	        	  var moduleId = dataKeys[0];    
+	        	  var up = dataKeys[2];    
+	        	  var down = dataKeys[3];  
+	        	  $("#menu-up").removeAttr("hidden");
+	        	  $("#menu-down").removeAttr("hidden");
+	        	  if(up=="0"){
+	        		$("#menu-up").attr("hidden","hidden");
+	        	  }
+	        	  if(down=="0"){
+	        		  $("#menu-down").attr("hidden","hidden");
+	        	  }
+	          } 
+	        })
 		//-------------------------------------------------------------------------
 		function hiddenDiv(divId){
 			$("#"+divId).toggleClass('div-display');
@@ -213,12 +246,7 @@
 		function changeUrl(interfacId){
 			$("#form"+interfacId).attr("action",$("#input"+interfacId).val());
 		}
-		
 		 
-		//--------------------------------------------------------------------
-		    $("[data-toggle=popover]")
-		        .popover()
-		 //-------------------------------------------------------------------- 
 	</script>
 </body>
 </html>

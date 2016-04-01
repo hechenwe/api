@@ -24,7 +24,7 @@
 			<h3 class="form-signin-heading">登录系统</h3>
 			<br> <input name="userName" type="text" class="form-control" placeholder="" required autofocus> <br> <input type="password" name="password" class="form-control" placeholder="Password" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-			<br> <a>忘记密码？</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>忘记用户名？</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href="/api/indexController/register.html">立即注册</a>
+			<br> <a href="/api/userController/toFindPassword.html">忘记密码？</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a>忘记用户名？</a>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <a href="/api/indexController/register.html">立即注册</a>
 
 		</form>
 

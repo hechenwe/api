@@ -13,13 +13,7 @@
 											<label>模块名称</label> <input id="${module.moduleId}moduleName" class="form-control" value="${module.moduleName}">
 											<p class="help-block"></p>
 										</div>
-										<!-- <div class="form-group">
-											<label>模块代码</label> <input id="${module.moduleId}moduleCode"  class="form-control" value="${module.moduleCode}">
-										</div>
-										<div class="form-group">
-											<label>模块简介</label>
-											<textarea id="${module.moduleId}moduleIntro"  class="form-control" rows="3">${module.moduleIntro}</textarea>
-										</div> -->
+									 
 									<button type="button" onclick="updateModule('${module.moduleId}');" class="btn btn-default">确定</button>
 									<button type="button" onclick="colseModuleDiv('${module.moduleId}');"  class="btn btn-default">取消</button>
 							</form>
@@ -37,12 +31,13 @@
 		var moduleName = $("#"+moduleId+"moduleName").val();
 		var moduleCode = $("#"+moduleId+"moduleCode").val();
 		var moduleIntro = $("#"+moduleId+"moduleIntro").val();
-		var url = '../module/updateModule.html';
+		var url = '../module/saveModule.html';
 		url = url + '?projectId='+projectId+
 				'&moduleId='+moduleId +
 				'&moduleName='+moduleName+ 
 				'&moduleCode='+moduleCode+ 
 				'&moduleIntro='+moduleIntro;
+		 
 		$.get(url ,function (data){
 			  window.location.reload();//刷新当前页面.
 		})

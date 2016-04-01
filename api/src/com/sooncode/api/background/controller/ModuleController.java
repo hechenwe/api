@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sooncode.api.background.entity.Module;
-import com.sooncode.api.background.entity.Project;
+ 
 import com.sooncode.api.background.service.ModuleService;
-import com.sooncode.api.background.service.ProjectService;
+ 
  
  
  
@@ -27,8 +27,7 @@ public class ModuleController {
 	@Autowired
 	private ModuleService moduleService;
 
-	@Autowired
-	private ProjectService  projectService;
+	 
 
 	/**
 	 * 保存模块信息
@@ -45,9 +44,6 @@ public class ModuleController {
 		String moduleName = request.getParameter("moduleName");
 		String moduleCode = request.getParameter("moduleCode");
 		String moduleIntro = request.getParameter("moduleIntro");
-		// String weight = request.getParameter("weight");
-		String type = request.getParameter("type");
-
 		Module m = new Module();
 		m.setProjectId(projectId.replace("-", ""));
 		m.setModuleId(moduleId.replace("-", ""));
@@ -57,50 +53,13 @@ public class ModuleController {
 		Integer weightInt = moduleService.moduleDao.getMaxWeight(projectId);
 		weightInt = weightInt==null ? 0 : weightInt;
 		m.setWeight(weightInt + 1);
-		Long n;
-		if (type != null && type.equals("update")) {
-			n = moduleService.moduleDao.update(m);
-		} else {
-			n = moduleService.moduleDao.save(m);
-		}
-		if (n == 1) {
+		Long n = moduleService.moduleDao.saveOrUpdate(m);
+		if (n !=null && n == 1) {
 			return "1";
 		}
 		return "0";
 	}
-
-	 
-
-	/**
-	 * 更新模块信息
-	 * 
-	 * @param request
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/updateModule")
-	public ModelAndView updateModule(HttpServletRequest request, HttpSession session) {
-
-		String moduleId = request.getParameter("moduleId");
-		String moduleName = request.getParameter("moduleName");
-		String moduleCode = request.getParameter("moduleCode");
-		String moduleIntro = request.getParameter("moduleIntro");
-		String projectId = request.getParameter("projectId");
-
-		Module m = new Module();
-
-		m.setModuleId(moduleId);
-		m.setModuleName(moduleName);
-		m.setModuleCode(moduleCode);
-		m.setModuleIntro(moduleIntro);
-
-		  moduleService.moduleDao.update(m);
-		Project project  =	
-				projectService.projectDao.getProjectAllInfo(projectId);
-		Map<String, Object> map = new HashMap<>();
-		map.put("project", project);
-		return new ModelAndView("ed/ed_index", map);
-	}
+ 
 
 	/**
 	 * 删除模块信息

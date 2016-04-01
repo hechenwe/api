@@ -14,8 +14,11 @@ function toAddModule(projectId) {
 
 }
 // -----------------------------添加接口----------------------------------------
-function toAddInterface(moduleId) {
-	$("#div_interfac"+moduleId).toggleClass('div-display');
+function toAddInterface() {
+	 var dataKeys = $("#context-menu").attr("data-key").split(":");
+	 var moduleId = dataKeys[0];  
+	 
+	$("#div_interfac"+moduleId).removeClass('div-display');
 	 
 	$("#moduleId").val(moduleId);
 }

@@ -18,7 +18,6 @@
 	var toggle = '[data-toggle="context"]';
 
 	var ContextMenu = function (element, options) {
-		
 		this.$element = $(element);
 
 		this.before = options.before || this.before;
@@ -36,7 +35,7 @@
 
 		constructor: ContextMenu
 		,show: function(e) {
-			 
+
 			var $menu
 				, evt
 				, tp
@@ -106,7 +105,6 @@
 		}
 
 		,listen: function () {
-			 
 			this.$element.on('contextmenu.context.data-api', this.scopes, $.proxy(this.show, this));
 			$('html').on('click.context.data-api', $.proxy(this.closemenu, this));
 			$('html').on('keydown.context.data-api', $.proxy(this.keydown, this));
@@ -123,7 +121,6 @@
 		}
 
 		,getMenu: function () {
-			
 			var selector = this.$element.data('target')
 				, $menu;
 
@@ -175,9 +172,10 @@
 	 * ========================== */
 
 	$.fn.contextmenu = function (option,e) {
-		 
+		var key = $(this).attr("data-key");
+		$("#context-menu").attr("data-key",key);
+	 
 		return this.each(function () {
-			 
 			var $this = $(this)
 				, data = $this.data('context')
 				, options = (typeof option == 'object') && option;
@@ -194,7 +192,6 @@
 
 	$(document)
 	   .on('contextmenu.context.data-api', function() {
-		   
 			$(toggle).each(function () {
 				var data = $(this).data('context');
 				if (!data) return;
@@ -202,9 +199,8 @@
 			});
 		})
 		.on('contextmenu.context.data-api', toggle, function(e) {
-			 
 			$(this).contextmenu('show', e);
-			
+
 			e.preventDefault();
 			e.stopPropagation();
 		});

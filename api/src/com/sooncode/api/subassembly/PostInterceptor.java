@@ -44,9 +44,10 @@ public class PostInterceptor extends HandlerInterceptorAdapter {
 		boolean bool5 = method.equals("POST") && url.contains("indexController/exit");
 		boolean bool6 =   url.contains("mailController/getCode");
 		boolean bool7 =   url.contains("userController/addUser");
+		boolean bool10 =   url.contains("userController/toFindPassword.html");
 	 
 
-		if ( bool1 || bool2 || bool3 || bool4 ||  bool5 ||bool6 ||bool7||bool8||bool9  ) {  
+		if ( bool1 || bool2 || bool3 || bool4 ||  bool5 ||bool6 ||bool7||bool8||bool9||bool10 ) {  
 			return true;
 		} else {
 			HttpSession session = request.getSession();

@@ -235,5 +235,16 @@ public class UserController {
 		}
 		
 	}
+	/**
+	 * 跳转至 重置密码页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/toFindPassword")
+	public ModelAndView toFindPassword(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView("register/find_password");
+		
+		return mav;
+	}
 
 }
