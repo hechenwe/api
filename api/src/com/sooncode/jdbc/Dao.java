@@ -518,14 +518,19 @@ public abstract class Dao<T> {
 
 		RObject rObj = new RObject(obj);
 		Object id = rObj.getPkValue();
-		if (id != null) {// obj 有id update();
-			return update(obj);
-		} else {// obj 没有id
-			Object oldObj = get(obj);
-			if (oldObj == null) {
-				return save(obj);// 用obj 去数据库查询 如果不存在 则保存
-			} else {
-				return -1L;// 用obj 去数据库查询 如何存在 不更新 不保存
+		if (id == null) {// obj 没有id 保存();
+			return save(obj);
+		} else {// obj 有id 
+			
+			String pk = rObj.getPk();
+			RObject newRobj= new RObject(obj.getClass());
+			newRobj.invokeSetMethod(pk, id);
+			Object newObj =newRobj.getObject() ;
+			Object oldObj = get(newObj); //去数数据库查询
+			if (oldObj == null) { //数据库没有记录
+				return save(obj);//保存
+			}else {//数据库有记录
+				return update(obj);//更新 
 			}
 		}
 
