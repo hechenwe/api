@@ -28,6 +28,29 @@ public class RObject {
 	private Object object;
 	// private Class<?> clas;
 
+	
+	public RObject(Object object) {
+		this.object = object;
+		Map<String, Object> fields = this.getFiledAndValue();
+		for (Map.Entry<String, Object> entry : fields.entrySet()) {
+			this.invokeSetMethod(entry.getKey(), entry.getValue());
+		}
+	}
+	public RObject(Class<?> clas) {
+		 
+		
+		try {
+			this.object = clas.newInstance();
+			Map<String, Object> fields = this.getFiledAndValue();
+			for (Map.Entry<String, Object> entry : fields.entrySet()) {
+				this.invokeSetMethod(entry.getKey(), entry.getValue());
+			}
+			
+		} catch ( Exception e) {
+			 
+			e.printStackTrace();
+		}  
+	}
 	/** 获取对象的类名 */
 	public String getClassName() {
 		// String[] str = this.object.getClass().getName().split("\\.");
@@ -122,28 +145,7 @@ public class RObject {
 		return null;
 	}
 	
-	public RObject(Object object) {
-		this.object = object;
-		Map<String, Object> fields = this.getFiledAndValue();
-		for (Map.Entry<String, Object> entry : fields.entrySet()) {
-			this.invokeSetMethod(entry.getKey(), entry.getValue());
-		}
-	}
-	public RObject(Class<?> clas) {
-		 
-		
-		try {
-			this.object = clas.newInstance();
-			Map<String, Object> fields = this.getFiledAndValue();
-			for (Map.Entry<String, Object> entry : fields.entrySet()) {
-				this.invokeSetMethod(entry.getKey(), entry.getValue());
-			}
-			
-		} catch ( Exception e) {
-			 
-			e.printStackTrace();
-		}  
-	}
+	
 
 	/**
 	 * 执行对象的SET方法
