@@ -33,6 +33,7 @@ public class Jdbc {
 	public final static Logger logger = Logger.getLogger("JdbcUtil.class");
 	private static int counter = 0;
 	private DB db;
+	private String dbKey="default";
 
 	/**
 	 * 
@@ -40,17 +41,18 @@ public class Jdbc {
 	 *            数据源关键码
 	 */
 	public Jdbc(String dbKey) {
+		this.dbKey=dbKey;
 		this.db = DBs.getDB(dbKey);
 	}
     public Jdbc(){
-    	this.db = DBs.getDB("default");
+    	this.db = DBs.getDB(dbKey);
     }
     /**
      * 获取数据库连接
      * @return
      */
 	private Connection getConnection() {
-
+		this.db = DBs.getDB(dbKey);
 		String DRIVER = db.getDriver();
 		String IP = db.getIp();
 		String PORT = db.getPort();
@@ -71,6 +73,7 @@ public class Jdbc {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		return connnection;
 	}
 
