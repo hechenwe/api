@@ -31,5 +31,19 @@ public class PathUtil {
 		String webRoot = System.getProperty("tool.root");
 		return webRoot;
 	}
-
+	/**
+	 * 获取classes路径
+	 * @return
+	 */
+	public static String getClasses() {
+		String webRoot = getWebRoot();
+		return webRoot +"WEB-INF"+File.separatorChar+"classes";
+	}
+	
+//	private String getClasses() {
+//		   String path = getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
+//		   path = path.substring(1, path.length()-1);
+//		   return path;
+//		  
+//		}
 }
