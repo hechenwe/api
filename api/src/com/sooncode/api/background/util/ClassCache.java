@@ -1,6 +1,6 @@
 package com.sooncode.api.background.util;
 
- 
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,34 +20,23 @@ public class ClassCache {
 	public final static Logger logger = Logger.getLogger("ClassCache.class");
 	public static String root;
 	public static List<String> classCache;
-    
+
 	public static Map<String, List<String>> interfacCache;
 
 	static {
 		classCache = new ArrayList<>();
 		interfacCache = new HashMap<>();
-		root = getSrc();
+		root = new ClassCache().getClasses();
 		findClass(classCache, root);
 	}
 
-	public static String getSrc() {
-		 
-		String webRoot = System.getProperty("api.root");
-		
-		String classesPath = webRoot +File.separatorChar +"WEB-INF"+ File.separatorChar +"classes";
-		return classesPath;
-//		try {
-//			//src = Thread.currentThread().getContextClassLoader().getResource("/").getPath() + "";
-//			//src = src.substring(1,src.length()-1);
-//			src = File.separatorChar+"root"+File.separatorChar+"tomcat"+File.separatorChar+"webapps"+File.separatorChar+"api"+File.separatorChar+"WEB-INF"+File.separatorChar+"classes";
-//            logger.info("【src】:>"+src+"<");
-//		} catch (Exception e) {
-//			src = System.getProperty("user.dir") + File.separatorChar + "build"+ File.separatorChar+"classes";
-//			logger.info("【src】:"+src);
-//		}
-//		return src;
-	}
-
+	private String getClasses() {
+		   String path = this.getClass().getResource("/").getPath();
+		   File file = new File(path);
+		   String classesPath = file.toString()+File.separatorChar;
+		   return classesPath;
+		  
+		}
 	/**
 	 * 递归查找类
 	 * 
@@ -62,7 +51,7 @@ public class ClassCache {
 			if (fileName.contains(".class")) {
 				String packageName = path + "";
 				packageName = packageName.replace(root + File.separatorChar, "").replace(File.separatorChar + "", ".");
-                fileName = fileName.replace(".class", "");
+				fileName = fileName.replace(".class", "");
 				String className = packageName + "." + fileName;
 				classCache.add(className);
 				try {
@@ -70,15 +59,15 @@ public class ClassCache {
 
 					Class<?> interfaces[] = null;// 声明一个对象数组
 					interfaces = cla.getInterfaces();// 获取类实现的所有接口
-				    String interfaceName = "";
-				    List<String> classList = new ArrayList<>() ;
+					String interfaceName = "";
+					List<String> classList = new ArrayList<>();
 					if (interfaces.length == 1) {
 						interfaceName = interfaces[0].getName();
-						 classList = interfacCache.get(interfaceName);
+						classList = interfacCache.get(interfaceName);
 					}
 
 					if (classList == null) {
-						classList = new ArrayList<>() ;
+						classList = new ArrayList<>();
 						classList.add(className);
 						interfacCache.put(interfaceName, classList);
 					}
@@ -97,7 +86,9 @@ public class ClassCache {
 
 	/**
 	 * 获取接口的唯一实现类实例
-	 * @param interfac 接口
+	 * 
+	 * @param interfac
+	 *            接口
 	 * @return 接口的唯一实现类实例
 	 */
 	public static Object getImplement(Class<?> interfac) {

@@ -51,7 +51,7 @@ public class ProjectController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Project p = new Project();
 		p.setProjectId(projectId);
-		Project project = projectService.projectDao.getProjectAllInfo(projectId);
+		Project project = projectService.projectDao.getProjectsModules(projectId);
 		if (project == null) { // 新创建的项目 没有模块信息
 			project = projectService.projectDao.get(p);
 

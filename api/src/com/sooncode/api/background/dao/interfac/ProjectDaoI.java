@@ -9,7 +9,8 @@ import com.sooncode.jdbc.DaoI;
 public interface ProjectDaoI extends DaoI<Project> {
 
 	public  Project  getProjectAllInfo(String projectId); 
-	public  Interfac  getInterfacAllInfo(String interfacId); 
+	public  Interfac  getInterfacAllInfo(String interfacId);
+	Project getProjectsModules(String projectId); 
 		
 	 
 }

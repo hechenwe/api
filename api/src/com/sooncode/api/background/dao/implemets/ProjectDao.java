@@ -75,6 +75,20 @@ public class ProjectDao extends Dao<Project>implements ProjectDaoI {
 		return p;
 
 	}
+	
+	@Override
+	public Project getProjectsModules(String projectId) {
+		Project p = new Project();
+		Module m = new Module();
+		m.setProjectId(projectId);
+		p.setProjectId(projectId);
+		p = this.get(p);
+		@SuppressWarnings("unchecked")
+		List<Module> modules = (List<Module>) CacheDao.getPager(1L, Long.MAX_VALUE, m).getLists(); 
+		p.setModules(modules);
+		return p;
+		
+	}
 
 	/**
 	 * 获取接口
