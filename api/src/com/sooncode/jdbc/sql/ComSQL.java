@@ -2,7 +2,6 @@ package com.sooncode.jdbc.sql;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 

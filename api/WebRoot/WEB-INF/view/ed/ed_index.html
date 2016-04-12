@@ -17,7 +17,7 @@
 }
 </style>
 </head>
-<body>
+<body  oncontextmenu=self.event.returnValue=false > <!-- 禁用浏览器右键菜单 -->
 
 <input type="hidden" id="input_projectId" value="${project.projectId}">
 
@@ -76,16 +76,19 @@
 	</a>
 	
  <#-- 右键菜单 -->
-<div id="context-menu" data-key="">
-  <ul class="dropdown-menu" role="menu">
+<div  id="context-menu" data-key="">
+  <ul style="width:200px;" id = "context-menu-ul" class="dropdown-menu" role="menu">
+  
+  </ul>
+</div>
+
+<ul id = "module-lis" class="dropdown-menu" role="menu">
     <li><a onclick="editModule();" >修改模块</a></li>
     <li><a onclick="deleteModule();"  >删除模块 </a></li>
     <li><a onclick="toAddInterface();" >添加接口</a></li>
     <li id="menu-up"><a onclick="upModule();">向上移动</a></li>
     <li id="menu-down"><a onclick="downModule();">向下移动</a></li>
   </ul>
-</div>
-
 
 <!------------------------------------------------JS-----------------------------------------------------------------  -->
  
@@ -96,9 +99,13 @@
 	     //右键菜单 
 	     $('.context').contextmenu();
 	      
-	     //右键菜单 
-	     $('.b').mousedown(function(e){ 
+	     //右键菜单 --接口
+	       $('.b').mousedown(function(e){ 
 	          if(3 == e.which){ //这 是右键单击事件
+	        	  var lis = $("#module-lis").html();
+	        	  var ul = $("#context-menu-ul");
+	        	  ul.empty();
+	        	  ul.append(lis);
 	        	  var dataKeys = $(this).attr("data-key").split(":");
 	        	  var moduleId = dataKeys[0];    
 	        	  var up = dataKeys[2];    
@@ -112,7 +119,8 @@
 	        		  $("#menu-down").attr("hidden","hidden");
 	        	  }
 	          } 
-	        })
+	        });  
+	     
 		//-------------------------------------------------------------------------
 		function hiddenDiv(divId){
 			$("#"+divId).toggleClass('div-display');

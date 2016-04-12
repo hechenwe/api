@@ -426,8 +426,6 @@ public abstract class CacheDao {
 				e.printStackTrace();
 			}
 		}
-		 
 			return objects;
-		 
 	}
 }

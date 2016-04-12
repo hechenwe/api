@@ -3,9 +3,9 @@
              <div id = "div-intface-${moduleId}">                 
              <#if  interfaces ??><!-- 接口 if-->
                       <#list  interfaces as interfac ><!-- 接口 list-->
-                            <h5 id = "h5-${interfac.interfacId}"><img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a>
-                             <div   class="btn-group  ">
-				                 <!--  <p style="color:#BABABA;" class="fa fa-gear"  data-toggle="dropdown" aria-expanded="false"> -->
+                            <h5 class="data-h5" data-key=""  data-toggle="context" data-target="#context-menu" id = "h5-${interfac.interfacId}"><img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a>
+                             <!-- <div   class="btn-group  ">
+				                  <p style="color:#BABABA;" class="fa fa-gear"  data-toggle="dropdown" aria-expanded="false">
 				                  <p onclick="editInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p>
 				                  <p onclick="deleteInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-trash-o"></p>
 				                  <#if  interfac_index != 0>
@@ -14,17 +14,7 @@
 				                    <#if   interfac_has_next>
 				                    <p onclick="upOrdownInterface('down','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-angle-double-down"></p> 
 				                    </#if>
-				                 <!--  <ul class="dropdown-menu pull-left" role="menu">
-				                    <li style="margin-left:15px;"><p onclick="editInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p></li>
-				                    <li style="margin-left:15px;"><p onclick="deleteInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-trash-o"></p></li>
-				                    <#if  interfac_index != 0>
-				                    <li style="margin-left:18px;"><p onclick="upOrdownInterface('up','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-long-arrow-up"></p></li>
-				                    </#if>
-				                    <#if   interfac_has_next>
-				                    <li style="margin-left:18px;"><p onclick="upOrdownInterface('down','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-long-arrow-down"></p></li>
-				                    </#if>
-				                  </ul> -->
-				                  </div>
+				                  </div> -->
                             
                             </h5> 
                             <div id="interfac${interfac.interfacId}" class="div-display">
@@ -46,4 +36,42 @@
 			   </div>
 		  </div>
            
-</div>         
+</div>    
+
+
+<ul id="interface-ul-id" hidden="hidden">
+    <li><a onclick="editModule();" >修改接口</a></li>
+    <li><a onclick="deleteModule();"  >删除接口 </a></li>
+    <li><a onclick="toAddInterface();" >添加参数</a></li>
+    <li id="menu-up"><a onclick="upModule();">向上移动</a></li>
+    <li id="menu-down"><a onclick="downModule();">向下移动</a></li>
+</ul>
+
+<script type="text/javascript">
+
+//右键菜单 --模块  
+$('.data-h5').mousedown(function(e){  
+     if(3 == e.which){ //这 是右键单击事件
+    	 var lis = $("#interface-ul-id").html();
+         var ul = $("#context-menu-ul");
+         ul.empty();
+         ul.append(lis);
+     
+   	  /* var dataKeys = $(this).attr("data-key").split(":");
+   	  var moduleId = dataKeys[0];    
+   	  var up = dataKeys[2];    
+   	  var down = dataKeys[3];  
+   	  $("#menu-up").removeAttr("hidden");
+   	  $("#menu-down").removeAttr("hidden");
+   	  if(up=="0"){
+   		$("#menu-up").attr("hidden","hidden");
+   	  }
+   	  if(down=="0"){
+   		  $("#menu-down").attr("hidden","hidden");
+   	  } */
+   	  
+   	//var htm =  $(".dropdown-menu").html() ;
+   	  
+     } 
+   });
+</script>     

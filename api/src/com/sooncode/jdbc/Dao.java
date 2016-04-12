@@ -133,7 +133,7 @@ public abstract class Dao<T> {
 	}
 
 	public List<T> endGets() {
-		logger.info("【模糊查询】" + sql);
+		//logger.info("【模糊查询】" + sql);
 		List<Map<String, Object>> list = jdbc.executeQueryL(sql);
 		sql = "";
 		this.obj = null;
