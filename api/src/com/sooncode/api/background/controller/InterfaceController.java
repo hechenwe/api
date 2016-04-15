@@ -73,7 +73,7 @@ public class InterfaceController {
 		if(type!=null && type.equals("UPDATE")){
 			
 			interfacService.interfacDao.update(i);
-			
+			map.put("interfac",i);
 		}else{//添加 
 
 			Integer weight = interfacService.interfacDao.getMaxWeight(moduleId);

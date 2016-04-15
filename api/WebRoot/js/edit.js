@@ -68,8 +68,8 @@ function downModule() {
 
 
 //----------------------------更新接口信息-----------------------------------------------------
-function editInterface(interfacId) {
-
+function editInterface() {
+	var interfacId = $("#context-menu").attr("data-key").split(":")[0];
 	var urlString = '../interface/toEditInterface.html?projectId='+projectId+'&interfacId=' + interfacId;
 	
 	$.get(urlString, function(data) {
@@ -80,8 +80,8 @@ function editInterface(interfacId) {
 }
 
 //------------------删除接口------------------------
-function deleteInterface(interfacId) {
-	
+function deleteInterface() {
+	var interfacId = $("#context-menu").attr("data-key").split(":")[0];
 	if (confirm("确认要删除？")) {
 		var url = '../interface/deleteInterface.html?interfacId=' + interfacId+"&projectId="+projectId;
 		$.get(url,function (data){

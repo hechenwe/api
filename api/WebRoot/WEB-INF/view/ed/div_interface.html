@@ -1,10 +1,19 @@
 
-<div  style="margin-left: 30px;"> 
-             <div id = "div-intface-${moduleId}">                 
-             <#if  interfaces ??><!-- 接口 if-->
-                      <#list  interfaces as interfac ><!-- 接口 list-->
-                            <h5 class="data-h5" data-key=""  data-toggle="context" data-target="#context-menu" id = "h5-${interfac.interfacId}"><img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a>
-                             <!-- <div   class="btn-group  ">
+<div style="margin-left: 30px;">
+	<div id="div-intface-${moduleId}">
+		<#if interfaces ??>
+		<!-- 接口 if-->
+		<#list interfaces as interfac >
+		<!-- 接口 list-->
+		<#if interfac_index == 0>
+		<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:0:1" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+			<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> <#elseif interfac_has_next>
+			<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:1" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+				<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> <#else>
+				<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:0" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+					<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> </#if>
+
+					<!-- <div   class="btn-group  ">
 				                  <p style="color:#BABABA;" class="fa fa-gear"  data-toggle="dropdown" aria-expanded="false">
 				                  <p onclick="editInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p>
 				                  <p onclick="deleteInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-trash-o"></p>
@@ -15,63 +24,61 @@
 				                    <p onclick="upOrdownInterface('down','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-angle-double-down"></p> 
 				                    </#if>
 				                  </div> -->
-                            
-                            </h5> 
-                            <div id="interfac${interfac.interfacId}" class="div-display">
-                            
-                            </div>
-                             <div class="div-display"  style="margin-left:12px;" id="div-${interfac.interfacId}"  >
-		                      
-			                 </div>
-                            
-                            <hr id = "hr-${interfac.interfacId}" style="height:1px;border:none;border-top:1px dashed #B2B8BD;" />
-                  </#list><!-- 接口list-->
-           </#if><!-- 接口if-->
-           </div>
-           <div>
-	          <!--  <button type="button" onclick="toAddInterface('${moduleId}');" class="btn btn-outline btn-primary btn-xs">&nbsp;添加接口&nbsp;</button> -->
-	           <div style="height:15px;"></div>
-	           <div class="div-display"  style="margin-left:12px;" id="div_interfac${moduleId}"  >
-		           <#include "../add/add_interface.html"/>
-			   </div>
-		  </div>
-           
-</div>    
+
+				</h5>
+				<div id="interfac${interfac.interfacId}" class="div-display"></div>
+				<div class="div-display" style="margin-left: 12px;" id="div-${interfac.interfacId}"></div>
+
+				<hr id="hr-${interfac.interfacId}" style="height: 1px; border: none; border-top: 1px dashed #B2B8BD;" />
+				</#list>
+				<!-- 接口list-->
+				</#if>
+				<!-- 接口if-->
+	</div>
+	<div>
+		<!--  <button type="button" onclick="toAddInterface('${moduleId}');" class="btn btn-outline btn-primary btn-xs">&nbsp;添加接口&nbsp;</button> -->
+		<div style="height: 15px;"></div>
+		<div class="div-display" style="margin-left: 12px;" id="div_interfac${moduleId}"><#include "../add/add_interface.html"/></div>
+	</div>
+
+</div>
 
 
 <ul id="interface-ul-id" hidden="hidden">
-    <li><a onclick="editModule();" >修改接口</a></li>
-    <li><a onclick="deleteModule();"  >删除接口 </a></li>
-    <li><a onclick="toAddInterface();" >添加参数</a></li>
-    <li id="menu-up"><a onclick="upModule();">向上移动</a></li>
-    <li id="menu-down"><a onclick="downModule();">向下移动</a></li>
+	<li><a onclick="editInterface();">修改接口</a></li>
+	<li><a onclick="deleteInterface();">删除接口 </a></li>
+	<li><a onclick="toAddParameter();">添加参数</a></li>
+	<li id="interfac_menu_up" hidden ="hidden"><a onclick="upInterface();">向上移动</a></li>
+	<li id="interfac_menu_down" hidden ="hidden"><a onclick="downInterface();">向下移动</a></li>
 </ul>
 
 <script type="text/javascript">
+	//右键菜单 --模块  
+	$('.data-h5').mousedown(function(e) {
+		if (3 == e.which) { //这 是右键单击事件
+			var lis = $("#interface-ul-id").html();
+			var ul = $("#context-menu-ul");
+			ul.empty();
+			ul.append(lis);
+            //------------------------------------------------控制 上下移动
+			/* var dataKeys = $(this).attr("data-key").split(":");
+			//var moduleId = dataKeys[0];
+			var up = dataKeys[2];
+			var down = dataKeys[3];
+			
+			$("#interfac_menu_down").removeAttr("hidden");
+			$("#interfac_menu_up").removeAttr("hidden"); */
+			 
+			/*   if (up == "0") {
+				$("#interfac_menu_up").attr("hidden", "hidden");
+			} 
+			
+			if (down == "0") {
+				$("#interfac_menu_down").attr("hidden", "hidden");
+			}    */
+			//------------------------------------------------控制 上下移动
+			 
 
-//右键菜单 --模块  
-$('.data-h5').mousedown(function(e){  
-     if(3 == e.which){ //这 是右键单击事件
-    	 var lis = $("#interface-ul-id").html();
-         var ul = $("#context-menu-ul");
-         ul.empty();
-         ul.append(lis);
-     
-   	  /* var dataKeys = $(this).attr("data-key").split(":");
-   	  var moduleId = dataKeys[0];    
-   	  var up = dataKeys[2];    
-   	  var down = dataKeys[3];  
-   	  $("#menu-up").removeAttr("hidden");
-   	  $("#menu-down").removeAttr("hidden");
-   	  if(up=="0"){
-   		$("#menu-up").attr("hidden","hidden");
-   	  }
-   	  if(down=="0"){
-   		  $("#menu-down").attr("hidden","hidden");
-   	  } */
-   	  
-   	//var htm =  $(".dropdown-menu").html() ;
-   	  
-     } 
-   });
-</script>     
+		}
+	});
+</script>

@@ -59,11 +59,11 @@
 		   
 			$.get(urlString,function (data){
 				
-				$("#div-intface-"+moduleId).append(data);
-				$("#div_interfac"+moduleId).addClass('div-display');
-				//alert(data);
+				//$("#div-intface-"+moduleId).append(data);
+				//$("#div_interfac"+moduleId).addClass('div-display');
 				 
-				//window.location.reload();
+				 
+				window.location.reload();
 			})
 			 
 		}

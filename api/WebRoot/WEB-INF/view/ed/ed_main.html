@@ -17,16 +17,6 @@
                             <#else>
                             	<b class="b" data-key="${module.moduleId}:${module.weight}:1:0"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
                             </#if>
-                                  <!-- <div class="btn-group  ">
-				                  <p onclick="editModule('${module.moduleId}');" style="color:#646773;width:24px;" class="fa fa-edit"></p>
-				                  <p onclick="deleteModule('${module.moduleId}');" style="color:#646773;width:24px;" class="fa fa-times-circle"></p>
-				                  <#if  module_index != 0>
-				                    <p onclick="upOrdownModule('up','${module.moduleId}','${module.weight}');" style="color:#646773;width:24px;" class="fa fa-angle-double-up"></p> 
-				                    </#if>
-				                  <#if  module_has_next>
-				                    <p onclick="upOrdownModule('down','${module.moduleId}','${module.weight}');" style="color:#646773;width:24px;" class="fa fa-angle-double-down"></p> 
-				                  </#if>
-				                  </div>  -->
                             </h4>  
                             
                             <div class="col-lg-12" style="height: 20px;" ></div>
