@@ -1,16 +1,6 @@
-<#--
-<h5 id="h5-${interfac.interfacId}">
-	<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a>
-	<div style="margin-top: 6px;" class="btn-group  ">
-		<p style="color: #BABABA;" class="fa fa-gear" data-toggle="dropdown" aria-expanded="false">
-		<ul class="dropdown-menu pull-left" role="menu">
-			<li style="margin-left: 15px;"><p onclick="editInterface('${interfac.interfacId}');" style="color: #627CBE;" class="fa fa-edit"></p></li>
-			<li style="margin-left: 15px;"><p onclick="deleteInterface('${interfac.interfacId}');" style="color: #627CBE;" class="fa fa-trash-o"></p></li>
-			<li style="margin-left: 18px;"><p onclick="upOrdownInterface('up','${interfac.interfacId}','${interfac.weight}');" style="color: #627CBE;" class="fa fa-long-arrow-up"></p></li>
-		</ul>
-	</div>
+<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:0" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+	<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}'" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}')">${interfac.interfacName}</a> 
 </h5>
 <div id="interfac${interfac.interfacId}" class="div-display"></div>
 <div class="div-display" style="margin-left: 12px;" id="div-${interfac.interfacId}"></div>
 <hr id="hr-${interfac.interfacId}" style="height: 1px; border: none; border-top: 1px dashed #B2B8BD;" />
--->

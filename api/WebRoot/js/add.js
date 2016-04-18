@@ -18,7 +18,10 @@ function toAddInterface() {
 	 var dataKeys = $("#context-menu").attr("data-key").split(":");
 	 var moduleId = dataKeys[0];  
 	 
-	$("#div_interfac"+moduleId).removeClass('div-display');
+	 
+	$("#div-intface-"+moduleId).addClass('div-display');//隐藏 模块下的所用接口
+	 
+	$("#div_interfac"+moduleId).removeClass('div-display');//显示添加接口模块
 	 
 	$("#moduleId").val(moduleId);
 }

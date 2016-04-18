@@ -1,44 +1,34 @@
 
 <div style="margin-left: 30px;">
 	<div id="div-intface-${moduleId}">
-		<#if interfaces ??>
-		<!-- 接口 if-->
-		<#list interfaces as interfac >
-		<!-- 接口 list-->
-		<#if interfac_index == 0>
-		<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:0:1" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
-			<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> <#elseif interfac_has_next>
-			<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:1" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
-				<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> <#else>
-				<h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:0" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
-					<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}','img_interfac_${interfac.interfacId}')">${interfac.interfacName}</a> </#if>
-
-					<!-- <div   class="btn-group  ">
-				                  <p style="color:#BABABA;" class="fa fa-gear"  data-toggle="dropdown" aria-expanded="false">
-				                  <p onclick="editInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-edit"></p>
-				                  <p onclick="deleteInterface('${interfac.interfacId}');" style="color:#627CBE;" class="fa fa-trash-o"></p>
-				                  <#if  interfac_index != 0>
-				                    <p onclick="upOrdownInterface('up','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-angle-double-up"></p> 
-				                    </#if>
-				                    <#if   interfac_has_next>
-				                    <p onclick="upOrdownInterface('down','${interfac.interfacId}','${interfac.weight}');" style="color:#627CBE;" class="fa fa-angle-double-down"></p> 
-				                    </#if>
-				                  </div> -->
-
-				</h5>
-				<div id="interfac${interfac.interfacId}" class="div-display"></div>
-				<div class="div-display" style="margin-left: 12px;" id="div-${interfac.interfacId}"></div>
-
+		<#if interfaces ??>            <#-- 接口 if-->
+		<#list interfaces as interfac ><#-- 接口 list-->
+		    <#if interfac_index == 0>
+		    <h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:0:1" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+			<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}')">${interfac.interfacName}</a> 
+		    <#elseif interfac_has_next>
+		    <h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:1" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+			<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}')">${interfac.interfacName}</a> 
+		    <#else>
+		    <h5 class="data-h5" data-key="${interfac.interfacId}:${interfac.weight}:1:0" data-toggle="context" data-target="#context-menu" id="h5-${interfac.interfacId}">
+			<img class="img" id="img_interfac_${interfac.interfacId}" onclick="openOrColseInterfac('${interfac.interfacId}'" src="../images/left.png">&nbsp;&nbsp;<img src="../images/I.png"><a ondblclick="openOrColseInterfac('${interfac.interfacId}')">${interfac.interfacName}</a> 
+		    </#if>
+			</h5>
+				<div id="interfac${interfac.interfacId}" class="div-display">
+				<#--修改详细-->
+				</div>
+				<div class="div-display" style="margin-left: 12px;" id="div-${interfac.interfacId}">
+				<#--修改接口-->
+				</div>
 				<hr id="hr-${interfac.interfacId}" style="height: 1px; border: none; border-top: 1px dashed #B2B8BD;" />
-				</#list>
-				<!-- 接口list-->
-				</#if>
-				<!-- 接口if-->
+		 </#list>                      <#-- 接口list-->
+		 </#if>                        <#-- 接口if-->
 	</div>
 	<div>
-		<!--  <button type="button" onclick="toAddInterface('${moduleId}');" class="btn btn-outline btn-primary btn-xs">&nbsp;添加接口&nbsp;</button> -->
 		<div style="height: 15px;"></div>
-		<div class="div-display" style="margin-left: 12px;" id="div_interfac${moduleId}"><#include "../add/add_interface.html"/></div>
+		<div class="div-display" style="margin-left: 12px;" id="div_interfac${moduleId}">
+		<#include "../add/add_interface.html"/>
+		</div>
 	</div>
 
 </div>
@@ -60,6 +50,9 @@
 			var ul = $("#context-menu-ul");
 			ul.empty();
 			ul.append(lis);
+			
+			  var key = $(this).attr("data-key");
+      		  $("#context-menu").attr("data-key",key);
             //------------------------------------------------控制 上下移动
 			/* var dataKeys = $(this).attr("data-key").split(":");
 			//var moduleId = dataKeys[0];

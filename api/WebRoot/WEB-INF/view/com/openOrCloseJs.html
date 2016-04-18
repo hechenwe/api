@@ -13,8 +13,11 @@
 	
 	
 	//-----------------------------------
-	function openOrColseModule(moduleId ,imgId){
+	function openOrColseModule(moduleId){
+	 
+		var imgId = "img_module_"+moduleId;
 		var bool = $("#module"+moduleId).hasClass('div-display');
+		
 		if(bool){ 
 			$("#"+imgId).attr("src","../images/down.png");
 		}else{

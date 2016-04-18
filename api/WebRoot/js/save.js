@@ -58,12 +58,12 @@
 			//window.location.href=urlString;
 		   
 			$.get(urlString,function (data){
-				
-				//$("#div-intface-"+moduleId).append(data);
-				//$("#div_interfac"+moduleId).addClass('div-display');
+				$("#div-intface-"+moduleId).removeClass('div-display');//显示 模块下的所用接口
+				$("#div-intface-"+moduleId).append(data);
+				$("#div_interfac"+moduleId).addClass('div-display');
 				 
 				 
-				window.location.reload();
+				//window.location.reload();
 			})
 			 
 		}

@@ -9,23 +9,23 @@
                             
 <#if project.modules ??><!-- 模块 if-->
        <#list project.modules as module ><!-- 模块 list-->
-                            <h4 id="h4-${module.moduleId}" >
-                            <#if  module_index == 0>
-                            	<b class="b" data-key="${module.moduleId}:${module.weight}:0:1"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
-                            <#elseif  module_has_next>
-                            	<b class="b" data-key="${module.moduleId}:${module.weight}:1:1"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
-                            <#else>
-                            	<b class="b" data-key="${module.moduleId}:${module.weight}:1:0"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}','img_module_${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
-                            </#if>
-                            </h4>  
-                            
-                            <div class="col-lg-12" style="height: 20px;" ></div>
-                            <div id="module${module.moduleId}" class="div-display">
-                             
-                            </div>  
-                            <div class="div-display"  style="margin-left:31px;" id="div-${module.moduleId}"  >
-				           
-			                </div>
+               <h4 id="h4-${module.moduleId}" >
+               <#if  module_index == 0>
+               	<b class="b" data-key="${module.moduleId}:${module.weight}:0:1"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
+               <#elseif  module_has_next>
+               	<b class="b" data-key="${module.moduleId}:${module.weight}:1:1"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
+               <#else>
+               	<b class="b" data-key="${module.moduleId}:${module.weight}:1:0"  data-toggle="context" data-target="#context-menu"><img class="img" id="img_module_${module.moduleId}" onclick="openOrColseModule('${module.moduleId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/M.png"><a ondblclick="openOrColseModule('${module.moduleId}')">${module.moduleName}</a></b>&nbsp;
+               </#if>
+               </h4>  
+               
+               <div class="col-lg-12" style="height: 20px;" ></div>
+               <div id="module${module.moduleId}" class="div-display">
+                
+               </div>  
+               <div class="div-display"  style="margin-left:31px;" id="div-${module.moduleId}"  >
+  
+               </div>
                             
                                     
        </#list><!-- 模块 list-->

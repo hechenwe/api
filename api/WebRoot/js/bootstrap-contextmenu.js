@@ -172,8 +172,8 @@
 	 * ========================== */
 
 	$.fn.contextmenu = function (option,e) {
-		var key = $(this).attr("data-key");
-		$("#context-menu").attr("data-key",key);
+		//var key = $(this).attr("data-key");
+		//$("#context-menu").attr("data-key",key);
 	 
 		return this.each(function () {
 			var $this = $(this)

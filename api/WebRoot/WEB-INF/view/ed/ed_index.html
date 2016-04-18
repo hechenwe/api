@@ -93,7 +93,6 @@
 <!------------------------------------------------JS-----------------------------------------------------------------  -->
  
 	<#include "../com/js.html"/>
-	<#include "../com/openOrCloseJs.html"/>
 	<script type="text/javascript" src="../js/bootstrap-contextmenu.js"></script>
 	<script type="text/javascript">
 	     //右键菜单 
@@ -106,8 +105,12 @@
 	        	  var ul = $("#context-menu-ul");
 	        	  ul.empty();
 	        	  ul.append(lis);
-	        	  var dataKeys = $(this).attr("data-key").split(":");
-	        	  console.log($(this).attr("data-key"));
+	        	  
+	        	  var key = $(this).attr("data-key");
+	      		  $("#context-menu").attr("data-key",key);
+	      		
+	        	  var dataKeys = key.split(":");
+	        	  
 	        	  var moduleId = dataKeys[0];    
 	        	  var up = dataKeys[2];    
 	        	  var down = dataKeys[3];  
@@ -183,8 +186,8 @@
 		
 		
 		//---------------   展开 模块    --------------------
-		function openOrColseModule(moduleId ,imgId){
-			
+		function openOrColseModule(moduleId){
+			var imgId = "img_module_"+moduleId;
 			var bool = $("#module"+moduleId).hasClass('div-display');
 			if(bool){ 
 				var string = $("#module"+moduleId).html().trim();
@@ -202,7 +205,9 @@
 			$("#module"+moduleId).toggleClass('div-display');
 		}
 		//------------------ 展开 接口 -----------------
-		function openOrColseInterfac(interfacId ,imgId){
+		function openOrColseInterfac(interfacId){
+			var imgId = "img_interfac_"+interfacId;
+			
 			var bool = $("#interfac"+interfacId).hasClass('div-display');
 			if(bool){ 
 				var string = $("#interfac"+interfacId).html().trim();
