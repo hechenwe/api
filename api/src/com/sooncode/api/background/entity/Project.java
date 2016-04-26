@@ -25,7 +25,11 @@ public class Project implements java.io.Serializable{
     
     
     /**项目代码*/
-    private String projectCode; 
+    private String projectCode;
+    
+    
+    /**资源前缀*/
+    private String urlPrefix; 
     
     
     /**项目简介*/
@@ -206,13 +210,7 @@ public class Project implements java.io.Serializable{
     
     //----------------------------------------------------------------
   
-  
- 
- 
    
- 
- 
-	 
 	
 	/**模块_模块*/ 
     public List<Module> getModules(){  
@@ -239,24 +237,23 @@ public class Project implements java.io.Serializable{
     } 
     
     
+    
     //----------------------------------------------------------------
     
      	 
 
-     //----------------------------------------------------------------
-     @Override
-	 public String toString() {
-		return  "Project : 项目_项目["+
-		        " ;项目编号:projectId = " + projectId +  
-		        " ;项目名称:projectName = " + projectName +  
-		        " ;项目代码:projectCode = " + projectCode +  
-		        " ;项目简介:projectIntro = " + projectIntro +  
-		        " ;创建时间:creatDate = " + creatDate +  
-		        " ;权重:weight = " + weight +  
-		        " ;公司编号:companyId = " + companyId +  
-		        " ;作者姓名:authorName = " + authorName +  
-		        " ;版本号:versions = " + versions + "]" ;
+     public String getUrlPrefix() {
+		return urlPrefix;
 	}
+	public void setUrlPrefix(String urlPrefix) {
+		this.urlPrefix = urlPrefix;
+	}
+	//----------------------------------------------------------------
+	@Override
+	public String toString() {
+		return "{\"projectId\":\"" + projectId + "\",\"projectName\":\"" + projectName + "\",\"projectCode\":\"" + projectCode + "\",\"urlPrefix\":\"" + urlPrefix + "\",\"projectIntro\":\"" + projectIntro + "\",\"creatDate\":\"" + creatDate + "\",\"weight\":\"" + weight + "\",\"companyId\":\"" + companyId + "\",\"authorName\":\"" + authorName + "\",\"versions\":\"" + versions + "\",\"company\":\"" + company + "\",\"modules\":\"" + modules + "\",\"users\":\"" + users + "\"}  ";
+	}
+    
  
 
 }

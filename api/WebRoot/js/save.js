@@ -61,7 +61,7 @@
 				$("#div-intface-"+moduleId).removeClass('div-display');//显示 模块下的所用接口
 				$("#div-intface-"+moduleId).append(data);
 				$("#div_interfac"+moduleId).addClass('div-display');
-				 
+				interfaceMousedown();
 				 
 				//window.location.reload();
 			})

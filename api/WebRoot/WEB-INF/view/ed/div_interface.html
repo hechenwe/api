@@ -38,40 +38,31 @@
 	<li><a onclick="editInterface();">修改接口</a></li>
 	<li><a onclick="deleteInterface();">删除接口 </a></li>
 	<li><a onclick="toAddParameter();">添加参数</a></li>
+	<li><a onclick="openOrColseEaxmple();">添加返回示例</a></li>
+	<li><a onclick="openOrColseEaxmpleReturn();">添加返回值参数</a></li>
 	<li id="interfac_menu_up" hidden ="hidden"><a onclick="upInterface();">向上移动</a></li>
 	<li id="interfac_menu_down" hidden ="hidden"><a onclick="downInterface();">向下移动</a></li>
 </ul>
+ 
 
 <script type="text/javascript">
 	//右键菜单 --模块  
-	$('.data-h5').mousedown(function(e) {
-		if (3 == e.which) { //这 是右键单击事件
-			var lis = $("#interface-ul-id").html();
-			var ul = $("#context-menu-ul");
-			ul.empty();
-			ul.append(lis);
-			
-			  var key = $(this).attr("data-key");
-      		  $("#context-menu").attr("data-key",key);
-            //------------------------------------------------控制 上下移动
-			/* var dataKeys = $(this).attr("data-key").split(":");
-			//var moduleId = dataKeys[0];
-			var up = dataKeys[2];
-			var down = dataKeys[3];
-			
-			$("#interfac_menu_down").removeAttr("hidden");
-			$("#interfac_menu_up").removeAttr("hidden"); */
-			 
-			/*   if (up == "0") {
-				$("#interfac_menu_up").attr("hidden", "hidden");
-			} 
-			
-			if (down == "0") {
-				$("#interfac_menu_down").attr("hidden", "hidden");
-			}    */
-			//------------------------------------------------控制 上下移动
-			 
-
-		}
-	});
+	
+	function interfaceMousedown(){
+		$('.data-h5').mousedown(function(e) {
+			if (3 == e.which) { //这 是右键单击事件
+				var lis = $("#interface-ul-id").html();
+				var ul = $("#context-menu-ul");
+				ul.empty();
+				ul.append(lis);
+				
+				  var key = $(this).attr("data-key");
+	      		  $("#context-menu").attr("data-key",key);
+			}
+		});
+	}
+	
+	
+	
+	interfaceMousedown();
 </script>

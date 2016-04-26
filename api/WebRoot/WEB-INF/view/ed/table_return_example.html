@@ -1,21 +1,21 @@
-<div class="">
+<div style="margin-left: 20px" class="">
 	<#if interfac.examples ??> 
 	<#list interfac.examples as example> 
 	<div id = "example${example.exampleId}"> 
 	<h5>
 	<#if example.exampleType=="SUCCESS">
-		<b>成功示例 :</b>
+		成功示例 :
 	<#elseif example.exampleType=="FAILURE" >
-		<b>失败示例 :</b>
+		失败示例 :
 	<#elseif example.exampleType=="EXCEPTION" >
-		<b>异常示例 :</b>
+		异常示例 :
 	<#else>
-		<b>其他示例 :</b>
+		其他示例 :
 	</#if>
-		<p onclick="toUpdateExample('${example.exampleId}','${interfac.interfacId}');"  style = "color:#627CBE;" class="fa fa-edit "></p>
-	    <p onclick="deleteExample('${example.exampleId}');"  style = "color:#627CBE;" class="fa fa-trash-o"></p>
+		<!-- <p onclick="toUpdateExample('${example.exampleId}','${interfac.interfacId}');"  style = "color:#627CBE;" class="fa fa-edit "></p>
+	    <p onclick="deleteExample('${example.exampleId}');"  style = "color:#627CBE;" class="fa fa-trash-o"></p> -->
 	</h5>
-	<pre><small id = "small-example-${example.exampleId}">${example.exampleContent} </small></pre>
+	<pre class="pre_js" data-key="${interfac.interfacId}:${example.exampleId}" data-toggle="context" data-target="#context-menu"><small id = "small-example-${example.exampleId}">${example.exampleContent} </small></pre>
 	
 	
 
@@ -92,9 +92,9 @@
 		</#if>
 
 	</div>
-	<p>
+	<!-- <p>
 		<a onclick="openOrColseEaxmpleReturn('${example.exampleId}');"><img src="../images/add.png"></img>添加返回值参数</a>
-	</p>
+	</p> -->
 	<#include "../add/add_parameter_return.html"/>
 		<!------------------------ 返回值参数---------------------------- -->
 
@@ -103,3 +103,30 @@
     </div>
 	</#list> </#if>
 </div>
+
+
+<ul id="return-ul-id" hidden="hidden">
+	<li><a onclick="toUpdateExample();">修改返回示例</a></li>
+	<li><a onclick="openOrColseEaxmple();">删除返回示例</a></li>
+	<li><a onclick="openOrColseEaxmpleReturn();">添加返回值参数</a></li>
+</ul>
+<script type="text/javascript">
+function returnMousedown() {
+	 
+	$('.pre_js').mousedown(function(e) {
+		 
+		if (3 == e.which) { //这 是右键单击事件
+			var lis = $("#return-ul-id").html();
+			var ul = $("#context-menu-ul");
+			ul.empty();
+			ul.append(lis);
+	
+			var key = $(this).attr("data-key");
+			$("#context-menu").attr("data-key", key);
+	
+		}
+	});
+}
+
+returnMousedown();
+</script>

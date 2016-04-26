@@ -11,7 +11,7 @@ import java.net.URL;
  * @author hechen
  *
  */
-public class HttpRequestOtherSystem {
+public class  HttpRequestOtherSystem {
  
 
 	 

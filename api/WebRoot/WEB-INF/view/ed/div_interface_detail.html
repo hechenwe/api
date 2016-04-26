@@ -1,9 +1,15 @@
 
                             <p>
-                                <small>接口URL : ${interfac.url}</small>  
+                                <small>接口URL :  <a>${interfac.url}</a></small>  
                             </p>
                             <p>
                                 <small>请求方式 :  <a>${interfac.requestType}</a></small>
+                            </p>
+                            <p>
+                                <small>参数类型 :  <a>${interfac.parameterFormat}</a></small>
+                            </p>
+                            <p>
+                                <small>返回数据类型 :  <a>${interfac.returnDataType}</a></small>
                             </p>
                             <#if interfac.style=="REST">
 							<p>
@@ -15,15 +21,29 @@
                             <!------------------- 参数 -----------------开始 -->
                            
                             
-                            <h6><img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png">&nbsp;&nbsp;  <b><a ondblclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');">参数 :</a></b>&nbsp;&nbsp;<img onclick="toAddParameter('${interfac.interfacId}');" src="../images/add.png"></h6>
+                            <h6><img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png">&nbsp;&nbsp;  <b><a ondblclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');">参数 :</a></b>&nbsp;&nbsp;<!-- <img onclick="toAddParameter('${interfac.interfacId}');" src="../images/add.png"> --></h6>
                            
                              
-						    <#include "../ed/table_parameter.html"/>     <!-- --------------参数table--------------- -->
+						  
+						    
+						        <!-- --------------参数table--------------- -->
 						    <#if interfac.parameterFormat =="JSON">
+						    <#if interfac.parameters ?? > 
+							<#list interfac.parameters as parameter>
+							<h6>
+								 <textarea  style="width:98.11%" name="jsonString" id="text_${parameter.parameterId}" class="form-control-textarea" rows="5">${parameter.parameterExample}</textarea> 
+							        <br>
+							        <p style="margin-left: 0px; margin-right: 16px;" align="right"><a onclick="formatJson('text_${parameter.parameterId}','try');"><small id="small_text_${parameter.parameterId}">格式化JSON</small></a></p> 
+							</h6>
+							<input type="hidden" name="requestType" value="POST"> 
+							</#list>
+							</#if>
+						    
                             <div class="div-display"  id="div_parameter${interfac.interfacId}"  >
 								<#include "../add/add_parameter_json.html"/>
 							</div>
                             <#else>
+                            <#include "../ed/table_parameter.html"/> 
 							<div class="div-display" id="div_parameter${interfac.interfacId}"  >
 								<#include "../add/add_parameter.html"/>
 							</div>
@@ -37,7 +57,7 @@
                             
                             <!------------------- 返回示例 -----------------开始 -->
                             
-                            <h6><img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')">返回示例 :</a></b>&nbsp;&nbsp;<img onclick="openOrColseEaxmple('${interfac.interfacId}');" src="../images/add.png"></h6>
+                            <h6><img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp; <b><a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')">返回示例 :</a></b>&nbsp;&nbsp;<!-- <img onclick="openOrColseEaxmple('${interfac.interfacId}');" src="../images/add.png"> --></h6>
                             
                             
                             <#include "../add/add_example.html"/> <!--  添加返回示例 -->  

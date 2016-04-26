@@ -146,7 +146,12 @@
 							<p>
 								<small>请求方式 : ${interfac.requestType}</small>
 							</p>
-                           
+                            <p>
+                                <small>参数类型 :  <a>${interfac.parameterFormat}</a></small>
+                            </p>
+                            <p>
+                                <small>返回数据类型 :  <a>${interfac.returnDataType}</a></small>
+                            </p>
 							<div style="margin-left: 60px;">
 
 								<#--  参数  开始 -->
@@ -171,37 +176,41 @@
 				</tr>
 			</thead>
 			<tbody>
-				<#list interfac.parameters as parameter> <#if parameter.isMust =="1">
-				<tr>
-					<td><small>${parameter.parameterName}</small></td>
-					<td><small>${parameter.parameterCode}</small></td>
-					<td><small>${parameter.parameterDataType}</small></td>
-					<#if parameter.minLength == parameter.maxLength>
-					<td><small>${parameter.minLength}</small></td>
-					<#else>
-					<td><small>[${parameter.minLength},${parameter.maxLength}]</small></td>
-					</#if>
-					<td>
-					<#if parameter.parameterExample?length gt 11 >
-					<a data-toggle="popover" data-placement="top" data-content="${parameter.parameterExample}" >
-					<small>${parameter.parameterExample?substring(0,5)}...</small></a>
-					<#else>
-					<small>${parameter.parameterExample}</small>
-					</#if>
-					</td>
-					<#if parameter.parameterConstraints ?size ==0>
-					<td><small>无</small></td> 
-					<#else>
-					<td>
-						<div class="col-lg-12">
-							<select id="select_${parameter.parameterId}" class="form-control input-sm "> <#list parameter.parameterConstraints as pc>
-								<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
-							</select>
-						</div>
-					</td> 
-					</#if>
-				</tr>
-				</#if> </#list></#if>
+				<#list interfac.parameters as parameter> 
+					<#if parameter.isMust =="1">
+					<tr>
+						<td><small>${parameter.parameterName}</small></td>
+						<td><small>${parameter.parameterCode}</small></td>
+						<td><small>${parameter.parameterDataType}</small></td>
+						<#if parameter.minLength == parameter.maxLength>
+						<td><small>${parameter.minLength}</small></td>
+						<#else>
+						<td><small>[${parameter.minLength},${parameter.maxLength}]</small></td>
+						</#if>
+						<td>
+						<#if parameter.parameterExample?length gt 11 >
+						<a data-toggle="popover" data-placement="top" data-content="${parameter.parameterExample}" >
+						<small>${parameter.parameterExample?substring(0,5)}...</small></a>
+						<#else>
+						<small>${parameter.parameterExample}</small>
+						</#if>
+						</td>
+						<#if parameter.parameterConstraints ?size ==0>
+						<td><small>无</small></td> 
+						<#else>
+						<td>
+							<div class="col-lg-12">
+								<select id="select_${parameter.parameterId}" class="form-control input-sm "> <#list parameter.parameterConstraints as pc>
+									<option>${pc.parameterConstraintCode} : ${pc.parameterConstraintExplain}</option> </#list>
+								</select>
+							</div>
+						</td> 
+						</#if>
+					</tr>
+					</#if> 
+				</#list>
+				
+				
 				<#--可选参数-->
 				<#assign n = 0> <#if interfac.parameters ?? > <#list interfac.parameters as parameter> <#if parameter.isMust =="0"> <#if n==0>
 				<tr>
@@ -237,6 +246,8 @@
 				<#--  可选参数  结束 -->
 			</tbody>
 		</table>
+		</#if>
+		
 	</div>
 </div>
 								<#-- 返回示例  开始 -->

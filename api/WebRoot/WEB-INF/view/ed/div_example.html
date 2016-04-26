@@ -1,28 +1,30 @@
- 
-	<div id = "example${example.exampleId}"> 
+
+<div id="example${example.exampleId}">
 	<h5>
-	<#if example.exampleType=="SUCCESS">
-		<b>成功示例 :</b>
-	<#elseif example.exampleType=="FAILURE" >
-		<b>失败示例 :</b>
-	<#elseif example.exampleType=="EXCEPTION" >
-		<b>异常示例 :</b>
-	<#else>
-		<b>其他示例 :</b>
-	</#if>
-		<p onclick="toUpdateExample('${example.exampleId}','${example.interfacId}');"  style = "color:#627CBE;" class="fa fa-edit "></p>
-	    <p onclick="deleteExample('${example.exampleId}');"  style = "color:#627CBE;" class="fa fa-trash-o"></p>
+		<#if example.exampleType=="SUCCESS"> <b>成功示例 :</b> 
+		<#elseif example.exampleType=="FAILURE" > <b>失败示例 :</b> 
+		<#elseif example.exampleType=="EXCEPTION" > <b>异常示例 :</b> 
+		<#else> <b>其他示例 :</b> 
+		</#if>
+		<p onclick="toUpdateExample('${example.exampleId}','${example.interfacId}');" style="color: #627CBE;" class="fa fa-edit "></p>
+		<p onclick="deleteExample('${example.exampleId}');" style="color: #627CBE;" class="fa fa-trash-o"></p>
 	</h5>
-	<pre><small id = "small-example-${example.exampleId}">${example.exampleContent}</small></pre>
+	<pre >
+		<small id="small-example-${example.exampleId}">${example.exampleContent}</small>
+	</pre>
 	<!--  添加返回值参数 -->
 	<p>
 		<a onclick="openOrColseEaxmpleReturn('${example.exampleId}');"><img src="../images/add.png"></img>添加返回值参数</a>
 	</p>
 	<#include "../add/add_parameter_return.html"/>
-		<!------------------------ 返回值参数---------------------------- -->
+	<!------------------------ 返回值参数---------------------------- -->
 
 	<#include "../add/add_value_explain.html"/>
 	<!-- 添加返回参数 值说明-->
-    </div>
-	 
+</div>
+
+
+
  
+
+

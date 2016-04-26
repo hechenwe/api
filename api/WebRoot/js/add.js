@@ -26,7 +26,11 @@ function toAddInterface() {
 	$("#moduleId").val(moduleId);
 }
 // -----------------------------添加参数----------------------------------------
-function toAddParameter(interfacId) {
+function toAddParameter() {
+	
+	 var dataKeys = $("#context-menu").attr("data-key").split(":");
+	 var interfacId = dataKeys[0]; 
+	
 	var url = '../interface/getInterfaceParameterFormatParameterSize.html?interfacId=' + interfacId;
 
 	$.get(url, function(data) {
@@ -63,7 +67,11 @@ function toAddExample(parameterId) {
 
 }
 //-------------------------------------显示添加参数约束-------------------------------------------
-function divDisplay(interfacId,parameterId){
+function divDisplay(){
+	 var dataKeys = $("#context-menu").attr("data-key").split(":");
+	 var interfacId = dataKeys[0]; 
+	 var parameterId = dataKeys[1]; 
+	
 	$("#div_parameter_constraint_"+interfacId).toggleClass('div-display');
 	 
 	$("#"+interfacId+"_parameterId").val(parameterId);
@@ -71,12 +79,16 @@ function divDisplay(interfacId,parameterId){
 }
 
 //-------------------------------------显示添加返回示例-------------------------------------------
-function openOrColseEaxmple(interfacId){
+function openOrColseEaxmple(){
+	 var dataKeys = $("#context-menu").attr("data-key").split(":");
+	 var interfacId = dataKeys[0]; 
 	$("#returnExample"+interfacId).toggleClass('div-display');
 	 
 }
 //-------------------------------------显示添加返回参数-------------------------------------------
 function openOrColseEaxmpleReturn(exampleId){
+	 var dataKeys = $("#context-menu").attr("data-key").split(":");
+	 var interfacId = dataKeys[0]; 
 	$("#example-parameter"+exampleId).toggleClass('div-display');
 	 
 }

@@ -36,7 +36,7 @@
 							<p class="help-block"></p>
 						</div>
 						<button onclick="updateExample('${example.exampleId}','${example.interfacId}')" type="button" class="btn btn-default">确定</button>
-						<button type="reset" onclick = "cancelUpdateExample('${example.interfacId}')" class="btn btn-default">取消</button>
+						<button type="reset" onclick = "cancelUpdateExample('${example.interfacId}','${example.exampleId}')" class="btn btn-default">取消</button>
 					</form>
 				</div>
 			</div>
@@ -45,8 +45,9 @@
 </div>
 <div class="col-lg-4"></div>
  <script type="text/javascript">
- function cancelUpdateExample (interfacId){
+ function cancelUpdateExample (interfacId,exampleId){
 	 $("#div-exam-"+interfacId).empty();
+	 $("#example"+exampleId).removeClass('div-display')
  }
 </script>
 	
