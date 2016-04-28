@@ -17,25 +17,7 @@
 			})
 
 		}
-		//-----------------------------------------------------保存模块----------------------------------------------
-		function saveModule() {
-			 
-			var projectId = $("#projectId").val();
-			var moduleId = Math.uuid();
-			var moduleName = $("#moduleName").val();
-			var moduleCode = $("#moduleCode").val();
-			var moduleIntro = $("#moduleIntro").val();
-			var weight = $("#weight").val();
-			var urlString = "../module/saveModule.html?projectId=" + projectId + "&moduleId=" + moduleId + "&moduleName=" + moduleName + "&moduleCode=" + moduleCode + "&moduleIntro=" + moduleIntro + "&weight=" + weight;
-			//alert(urlString);
-			//window.location.href=urlString;
-			$.get(urlString,function (data){
-				 
-				 window.location.reload();//刷新当前页面.
-			})
-			
-			//httpGet(urlString,moduleId,projectId,moduleName,'module','add-I2.png','toAddInterface');
-		} 
+		 
 		//-----------------------------------------------------保存接口----------------------------------------------
 		function saveInterface() {
 			var projectId = $("#input_projectId").val();

@@ -147,18 +147,18 @@
 								<small>请求方式 : ${interfac.requestType}</small>
 							</p>
                             <p>
-                                <small>参数类型 :  <a>${interfac.parameterFormat}</a></small>
+                                <small>参数类型 : ${interfac.parameterFormat}</small>
                             </p>
                             <p>
-                                <small>返回数据类型 :  <a>${interfac.returnDataType}</a></small>
+                                <small>返回数据类型 : ${interfac.returnDataType}</small>
                             </p>
-							<div style="margin-left: 60px;">
+							<div style="margin-left: 0px;">
 
 								<#--  参数  开始 -->
 
-								<h5>
-									<img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png">&nbsp;&nbsp;<img src="../images/P.png"><b><a ondblclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');">参数 :</a></b>
-								</h5>
+								<h6>
+									<!-- <img class="img" id="img_parameter_${interfac.interfacId}" onclick="openOrCloseParameter('${interfac.interfacId}','img_parameter_${interfac.interfacId}');" src="../images/left.png"> --><!-- <img src="../images/P.png"> --> <a>参数 :</a> 
+								</h6>
 
 
 								<div class="col-lg-12">
@@ -251,11 +251,15 @@
 	</div>
 </div>
 								<#-- 返回示例  开始 -->
-								<h5>
-									<img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/R.png"> <a ondblclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')"><b>返回示例 :</b></a> 
-								</h5>
+								<h6>
+									<!-- <img class="img" id="img_example_${interfac.interfacId}" onclick="openOrCloseExample('${interfac.interfacId}','img_example_${interfac.interfacId}')" src="../images/left.png"> --><!-- <img src="../images/R.png"> --> <a>返回示例 :</a> 
+								</h6>
 								<div id="example${interfac.interfacId}" class="span-4  "> 
-									<#if interfac.examples ??> <#list interfac.examples as example> <#if example.exampleType=="SUCCESS">
+									<#if interfac.examples ??> 
+									<#list interfac.examples as example> 
+									<#-- 
+									
+									<#if example.exampleType=="SUCCESS">
 									<h6>
 										<b>成功示例 :</b>
 									</h6>
@@ -273,6 +277,7 @@
 									</h6>
 									</#if>
                                  
+                                    -->
 								  <pre  style="margin-left: 0px; margin-right: 10px;"><small id = "pre-${example.exampleId}">${example.exampleContent}</small></pre>
 							      <p style="margin-left: 0px; margin-right: 10px;" align="right"><a onclick="formatJson('pre-${example.exampleId}');"><small id="small_pre-${example.exampleId}">格式化JSON</small></a></p> 
 							      <div style="margin-left: 0px; margin-right: 10px;" class="table-responsive">
@@ -346,9 +351,9 @@
 								<#-- 返回示例模块 结束 -->
 								
 <#-- 试一试  开始 -->
-		<h5>
-			<b><img class="img" id="img_try_${interfac.interfacId}" onclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<img src="../images/T.png"> <a ondblclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')"><font color="#FFAA2F">试一试</font></a></b>
-		</h5>
+		<h6>
+			<b> <img class="img" id="img_try_${interfac.interfacId}" onclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')" src="../images/left.png">&nbsp;&nbsp;<!-- <img src="../images/T.png">  --><a ondblclick="openOrCloseTry('${interfac.interfacId}','img_try_${interfac.interfacId}')"><font color="#FFAA2F">试一试</font></a></b>
+		</h6>
 		<div id="try${interfac.interfacId}" class=" ">
 		<p>
 			<small>接口URL : <input id="input${interfac.interfacId}" onchange="changeUrl('${interfac.interfacId}','${interfac.parameterFormat}');" class="super-input" style="width:90%"     value="${interfac.url}"></small>

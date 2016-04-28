@@ -5,14 +5,7 @@ function toAddProject() {
 	$("#page-wrapper").empty();
 	$("#page-wrapper").append($("#project").html());
 }
-// -----------------------------添加模块----------------------------------------
-function toAddModule(projectId) {
-	$("#div_module").toggleClass('div-display');
-	//$("#page-wrapper").empty();
-	//$("#page-wrapper").append($("#module").html());
-	$("#projectId").val(projectId);
-
-}
+ 
 // -----------------------------添加接口----------------------------------------
 function toAddInterface() {
 	 var dataKeys = $("#context-menu").attr("data-key").split(":");

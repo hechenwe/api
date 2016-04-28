@@ -1,19 +1,6 @@
 var projectId = $("#input_projectId").val();
 
-//-----------------更新模块信息---------------------
-function editModule() {
-   //id="context-menu" data-key=""
-	
-	var moduleId = $("#context-menu").attr("data-key").split(":")[0];
-	
-	var urlString = '../module/editModule.html?projectId='+projectId+'&moduleId=' + moduleId;
-    
-	$.get(urlString, function(data) {
-		$("#div-"+moduleId).empty(); 
-       $("#div-"+moduleId).append(data).toggleClass('div-display');
-	})
-
-}
+ 
 
 //------------------------关闭修改模块的div------------------------------------------------------------------
 function colseModuleDiv(moduleId) {
@@ -22,24 +9,7 @@ function colseModuleDiv(moduleId) {
 }
  
  
-//------------------删除模块------------------------
-function deleteModule() {
-	var moduleId = $("#context-menu").attr("data-key").split(":")[0];
-	if (confirm("确认要删除？")) {
-		var url = '../module/deleteModule.html?projectId='+projectId+'&moduleId=' + moduleId;
-		$.get(url,function (data){
-			if(data == "1"){
-				//$("#h4-"+moduleId).remove();
-				window.location.reload();//刷新当前页面.
-			}else{
-				alert("删除失败!");
-			}
-		})
-		 
-	} 
-	
-	 
-}
+ 
 
 //--------------------移动模块--------------------------------------------------------
 function upModule() {
