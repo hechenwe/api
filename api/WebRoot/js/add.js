@@ -79,9 +79,12 @@ function openOrColseEaxmple(){
 	 
 }
 //-------------------------------------显示添加返回参数-------------------------------------------
-function openOrColseEaxmpleReturn(exampleId){
+function openOrColseEaxmpleReturn(){
+	 
+	 
 	 var dataKeys = $("#context-menu").attr("data-key").split(":");
 	 var interfacId = dataKeys[0]; 
+	 var exampleId = dataKeys[1]; 
 	$("#example-parameter"+exampleId).toggleClass('div-display');
 	 
 }

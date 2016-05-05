@@ -32,15 +32,15 @@
 				<tr>
 					<th><small>名称</small></th>
 					<th><small>代码</small></th>
-					<th width="6%"><small>数据类型</small></th>
+					<th width="6%"><small>类型</small></th>
 
 					<th width="6%"><small>长度</small></th>
 					 
 					<th><small>示例</small></th>
 
-					<th width="6%"><small>是否必须</small></th>
+					<th width="8%"><small>是否必须</small></th>
 					<th><small>约束</small></th>
-					<th width="6%"><small>操作</small></th>
+					<!-- <th width="6%"><small>操作</small></th> -->
 					 
 				</tr>
 			</thead>
@@ -81,10 +81,10 @@
 						</#if>
 						<img style="float: left; margin-top: 7px;" onclick="openOrCloseValueExplain('${p.parameterId}','${example.exampleId}');" src="../images/add.png">
 					</td>
-					 <td>
+					 <!-- <td>
 						 <p onclick="" style=" color:#627CBE;" class="fa fa-edit"></p> &nbsp;&nbsp;&nbsp;
 						 <p onclick="" style=" color:#627CBE;" class="fa fa-trash-o"></p>
-					 </td>
+					 </td> -->
 				</tr>
 				</#list>
 			</tbody>
@@ -107,7 +107,7 @@
 
 <ul id="return-ul-id" hidden="hidden">
 	<li><a onclick="toUpdateExample();">修改返回示例</a></li>
-	<li><a onclick="openOrColseEaxmple();">删除返回示例</a></li>
+	<li><a onclick="deleteExample();">删除返回示例</a></li>
 	<li><a onclick="openOrColseEaxmpleReturn();">添加返回值参数</a></li>
 </ul>
 <script type="text/javascript">

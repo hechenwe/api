@@ -284,44 +284,41 @@
 							
 									<#-- 返回值参数 -->
 									<#if example.parameterReturs ?size != 0>
+									 
 									<table class="table table-striped table-bordered table-hover">
 										<thead>
 											<tr>
-												<th><small>名称</small></th>
 												<th><small>代码</small></th>
+												<th><small>名称</small></th>
 												<th><small>类型</small></th>
 												<th><small>长度</small></th>
-												<th><small>示例</small></th>
+												<!-- <th><small>示例</small></th> -->
+												<!-- <th><small></small></th> -->
 												<th><small>约束</small></th>
-												<th><small>说明</small></th>
 											</tr>
 										</thead>
 										<tbody>
 											<#list example.parameterReturs as p >
 							
 											<tr>
-												<td><small>${p.parameterName}</small></td>
 												<td><small>${p.parameterCode}</small></td>
+												<td><small>${p.parameterName}</small></td>
 												<td><small>${p.parameterDataType}</small></td>
 							                    <#if p.maxLength == p.minLength>
 												<td><small>${p.maxLength}</small></td>
 							                    <#else>
 												<td><small>[${p.minLength},${p.maxLength}]</small></td>
 							                    </#if>
-												 
-												<td>
-												<#if p.parameterExample?length gt 11 >
-												<a data-toggle="popover" data-placement="top" data-content="${p.parameterExample}" >
-												<small>${p.parameterExample?substring(0,5)}...</small></a>
-												<#else>
-												<small>${p.parameterExample}</small>
-												</#if>
-												</td> 
-												<#if p.isMust =="1">
-												<td><small>必须</small></td> 
-												<#else>
-												<td><small>可选</small></td>
-												</#if>
+												 <#--
+													<td>
+													<#if p.parameterExample?length gt 64 >
+													<a data-toggle="popover" data-placement="top" data-content="${p.parameterExample}" >
+													<small>${p.parameterExample?substring(0,5)}...</small></a>
+													<#else>
+													<small>${p.parameterExample}</small>
+													</#if>
+													</td> 
+												--> 
 												<td>
 												   <#if p.valueExplains?size !=0 >
 													<div style="margin-left: 0px; margin-right: 0px;" class="col-lg-10">
